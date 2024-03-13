@@ -7,6 +7,7 @@ package com.sansilvestre.desktop.app;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.sansilvestre.desktop.app.launch.screens.LaunchScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class App extends JFrame {
         setSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        add(new LaunchScreen());
     }
 
     public static void main(String[] args) {
