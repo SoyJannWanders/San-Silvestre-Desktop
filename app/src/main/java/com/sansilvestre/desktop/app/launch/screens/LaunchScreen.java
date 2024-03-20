@@ -3,7 +3,7 @@ package com.sansilvestre.desktop.app.launch.screens;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.NavigationController;
 import com.sansilvestre.desktop.app.AppStrings;
-import com.sansilvestre.desktop.app.AppThemes;
+import com.sansilvestre.desktop.app.Theme;
 import com.sansilvestre.desktop.app.auth.screens.AuthScreen;
 import com.sansilvestre.desktop.app.launch.screens.resources.LaunchStrings;
 import com.sansilvestre.desktop.app.launch.util.LaunchDI;
@@ -178,21 +178,21 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initUIStyles() {
-        logo.putClientProperty(FlatClientProperties.STYLE, AppThemes.applyLogoStyle());
+        logo.putClientProperty(FlatClientProperties.STYLE, Theme.applyLogoStyle());
         logo.setText(AppStrings.getAppName());
-        headline.putClientProperty(FlatClientProperties.STYLE, AppThemes.applyHeadlineStyle());
+        headline.putClientProperty(FlatClientProperties.STYLE, Theme.applyHeadlineStyle());
         headline.setText(LaunchStrings.getHeadline());
-        body.putClientProperty(FlatClientProperties.STYLE, AppThemes.applyBodyStyle());
+        body.putClientProperty(FlatClientProperties.STYLE, Theme.applyBodyStyle());
         body.setText(LaunchStrings.getBody());
-        scheduleLabel.putClientProperty(FlatClientProperties.STYLE, AppThemes.applyDefaultStyle());
+        scheduleLabel.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
         scheduleLabel.setText(LaunchStrings.getScheduleLabel());
         employeeScreenButton.setText(LaunchStrings.getEmployeeScreenButton());
-        authScreenLabel.putClientProperty(FlatClientProperties.STYLE, AppThemes.applyDefaultStyle());
+        authScreenLabel.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
         authScreenLabel.setText(LaunchStrings.getAuthScreenLabel());
         authScreenButton.setText(LaunchStrings.getAuthScreenButton());
         authScreenButton.setContentAreaFilled(false);
         authScreenButton.setCursor(HAND_CURSOR);
-        authScreenButton.putClientProperty(FlatClientProperties.STYLE, AppThemes.applySupportingButtonStyle());
+        authScreenButton.putClientProperty(FlatClientProperties.STYLE, Theme.applySupportingButtonStyle());
     }
 
     private void loadUIData() {
