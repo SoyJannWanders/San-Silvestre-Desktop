@@ -46,11 +46,9 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
         subConteiner = new javax.swing.JPanel();
         image = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(250, 250, 238));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(1200, 700));
 
-        mainConteiner.setBackground(new java.awt.Color(250, 250, 238));
         mainConteiner.setPreferredSize(new java.awt.Dimension(512, 700));
 
         logo.setText("Logo");
@@ -141,7 +139,6 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
                 .addGap(64, 64, 64))
         );
 
-        subConteiner.setBackground(new java.awt.Color(250, 250, 238));
         subConteiner.setName(""); // NOI18N
         subConteiner.setPreferredSize(new java.awt.Dimension(688, 700));
 
