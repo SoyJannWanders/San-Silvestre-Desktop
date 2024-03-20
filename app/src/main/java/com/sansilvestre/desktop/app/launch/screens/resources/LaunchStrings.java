@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class LaunchStrings {
 
-    private static final String LAUNCH_BUNDLE = Language.getSystemLanguage() + "Launch";
+    private static final String LAUNCH_BUNDLE = Language.getSystemLanguage() + "LaunchStrings";
 
     public static final ResourceBundle LAUNCH_STRINGS = ResourceBundle.getBundle(LAUNCH_BUNDLE);
 
