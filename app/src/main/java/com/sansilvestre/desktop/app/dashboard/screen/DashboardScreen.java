@@ -5,6 +5,7 @@
 package com.sansilvestre.desktop.app.dashboard.screen;
 
 import com.sansilvestre.desktop.app.dashboard.screen.component.AdministratorMenuComponent;
+import com.sansilvestre.desktop.app.product.screen.ProductScreen;
 import java.awt.BorderLayout;
 import java.awt.Component;
 
@@ -15,6 +16,8 @@ import java.awt.Component;
 public class DashboardScreen extends javax.swing.JPanel {
 
     private AdministratorMenuComponent adminsMenuComponent = new AdministratorMenuComponent();
+    
+    private ProductScreen productScreen = new ProductScreen();
     
     /**
      * Creates new form DashboardScreen
@@ -38,6 +41,7 @@ public class DashboardScreen extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1200, 700));
 
+        menuSection.setBackground(new java.awt.Color(255, 255, 51));
         menuSection.setPreferredSize(new java.awt.Dimension(256, 700));
 
         javax.swing.GroupLayout menuSectionLayout = new javax.swing.GroupLayout(menuSection);
@@ -51,17 +55,19 @@ public class DashboardScreen extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        contentSection.setBackground(new java.awt.Color(255, 255, 51));
+        contentSection.setMinimumSize(new java.awt.Dimension(944, 700));
         contentSection.setPreferredSize(new java.awt.Dimension(944, 700));
 
         javax.swing.GroupLayout contentSectionLayout = new javax.swing.GroupLayout(contentSection);
         contentSection.setLayout(contentSectionLayout);
         contentSectionLayout.setHorizontalGroup(
             contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 944, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         contentSectionLayout.setVerticalGroup(
             contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -86,6 +92,7 @@ public class DashboardScreen extends javax.swing.JPanel {
 
     private void initScreen() {
         insertMenu(adminsMenuComponent);
+        insertContent(productScreen);
     }
     
     private void insertMenu(Component menu) {
@@ -101,7 +108,7 @@ public class DashboardScreen extends javax.swing.JPanel {
         content.setSize(944, 700);
         content.setLocation(0, 0);
         contentSection.removeAll();
-        contentSection.add(content, new BorderLayout());
+        contentSection.add(content);
         contentSection.revalidate();
         contentSection.repaint();
     } 
