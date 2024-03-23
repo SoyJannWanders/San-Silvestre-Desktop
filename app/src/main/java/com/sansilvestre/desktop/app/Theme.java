@@ -34,4 +34,8 @@ public class Theme {
         return APP_BUNDLE.getString("supportingButton");
     }
 
+    public static String applyConteinerStyle() {
+        return APP_BUNDLE.getString("conteiner");
+    }
+    
 }
