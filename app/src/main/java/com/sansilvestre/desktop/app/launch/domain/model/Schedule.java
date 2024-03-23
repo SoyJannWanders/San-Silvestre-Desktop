@@ -1,6 +1,6 @@
 package com.sansilvestre.desktop.app.launch.domain.model;
 
-import com.sansilvestre.desktop.app.launch.screens.resources.LaunchStrings;
+import com.sansilvestre.desktop.app.launch.screen.resource.LaunchStrings;
 
 public enum Schedule {
 
