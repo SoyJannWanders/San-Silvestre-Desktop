@@ -1,21 +1,33 @@
-package com.sansilvestre.desktop.app.auth.screens;
+package com.sansilvestre.desktop.app.auth.screen;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.AppStrings;
 import com.sansilvestre.desktop.app.NavigationController;
 import com.sansilvestre.desktop.app.Theme;
-import com.sansilvestre.desktop.app.auth.screens.resources.AuthStrings;
-import com.sansilvestre.desktop.app.launch.screens.LaunchScreen;
+import com.sansilvestre.desktop.app.auth.screen.resource.AuthStrings;
+import com.sansilvestre.desktop.app.auth.screen.viewmodel.AuthViewModel;
+import com.sansilvestre.desktop.app.auth.util.AuthDI;
+import com.sansilvestre.desktop.app.launch.screen.LaunchScreen;
 
 import java.awt.*;
+import java.util.Arrays;
 
-public class AuthScreen extends javax.swing.JPanel {
+public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
+
+    private final AuthDI injector = AuthDI.getInstance();
+
+    private final AuthViewModel viewModel = injector.provideAuthViewModel();
 
     private final Cursor HAND_CURSOR = new Cursor(Cursor.HAND_CURSOR);
 
     public AuthScreen() {
+        setUpViewModel();
         initComponents();
         initUIStyles();
+    }
+
+    public void setUpViewModel() {
+        viewModel.setEvent(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -181,10 +193,37 @@ public class AuthScreen extends javax.swing.JPanel {
         launchScreenButton.setCursor(HAND_CURSOR);
         launchScreenButton.setText(AuthStrings.getLaunchScreenButton());
     }
-    
+
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-        // TODO add your handling code here:
+        viewModel.signIn(getUser(), getPassword());
     }//GEN-LAST:event_signInButtonActionPerformed
+
+    private String getUser() {
+        return emailInput.getText();
+    }
+
+    private String getPassword() {
+        StringBuilder password = new StringBuilder();
+        for (char character: passwordInput.getPassword()) {
+            password.append(character);
+        }
+        return password.toString();
+    }
+
+    @Override
+    public void onSignInLoading() {
+        System.out.println("Cargando...");
+    }
+
+    @Override
+    public void onSignInSuccess() {
+        System.out.println("Acceso Exitoso");
+    }
+
+    @Override
+    public void onSignInFailure() {
+        System.out.println("Acceso Erroneo");
+    }
 
     private void launchScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchScreenButtonActionPerformed
         NavigationController.getInstance().navigateTo(new LaunchScreen());
@@ -193,7 +232,6 @@ public class AuthScreen extends javax.swing.JPanel {
     private void emailInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailInputActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel body;

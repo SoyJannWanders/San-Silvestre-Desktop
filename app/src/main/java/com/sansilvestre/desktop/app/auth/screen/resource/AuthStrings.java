@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.auth.screens.resources;
+package com.sansilvestre.desktop.app.auth.screen.resource;
 
 import com.sansilvestre.desktop.app.Language;
 
