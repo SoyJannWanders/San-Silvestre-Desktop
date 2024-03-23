@@ -4,17 +4,24 @@
  */
 package com.sansilvestre.desktop.app.dashboard.screen;
 
+import com.sansilvestre.desktop.app.dashboard.screen.component.AdministratorMenuComponent;
+import java.awt.BorderLayout;
+import java.awt.Component;
+
 /**
  *
  * @author Jan
  */
 public class DashboardScreen extends javax.swing.JPanel {
 
+    private AdministratorMenuComponent adminsMenuComponent = new AdministratorMenuComponent();
+    
     /**
      * Creates new form DashboardScreen
      */
     public DashboardScreen() {
         initComponents();
+        initScreen();
     }
 
     /**
@@ -41,7 +48,7 @@ public class DashboardScreen extends javax.swing.JPanel {
         );
         menuSectionLayout.setVerticalGroup(
             menuSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         contentSection.setPreferredSize(new java.awt.Dimension(944, 700));
@@ -64,20 +71,41 @@ public class DashboardScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuSection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contentSection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(contentSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuSection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contentSection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(menuSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contentSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initScreen() {
+        insertMenu(adminsMenuComponent);
+    }
+    
+    private void insertMenu(Component menu) {
+        menu.setSize(256, 700);
+        menu.setLocation(0, 0);
+        menuSection.removeAll();
+        menuSection.add(menu, new BorderLayout());
+        menuSection.revalidate();
+        menuSection.repaint();
+    }
 
+    private void insertContent(Component content) {
+        content.setSize(944, 700);
+        content.setLocation(0, 0);
+        contentSection.removeAll();
+        contentSection.add(content, new BorderLayout());
+        contentSection.revalidate();
+        contentSection.repaint();
+    } 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentSection;
     private javax.swing.JPanel menuSection;
