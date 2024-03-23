@@ -7,6 +7,7 @@ package com.sansilvestre.desktop.app;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.sansilvestre.desktop.app.dashboard.screen.DashboardScreen;
 import com.sansilvestre.desktop.app.launch.screen.LaunchScreen;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class App extends JFrame {
         setSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        add(new LaunchScreen());
+        add(new DashboardScreen());
         NavigationController.getInstance().initApp(this);
     }
 
