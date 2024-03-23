@@ -7,6 +7,7 @@ import com.sansilvestre.desktop.app.Theme;
 import com.sansilvestre.desktop.app.auth.screen.resource.AuthStrings;
 import com.sansilvestre.desktop.app.auth.screen.viewmodel.AuthViewModel;
 import com.sansilvestre.desktop.app.auth.util.AuthDI;
+import com.sansilvestre.desktop.app.dashboard.screen.DashboardScreen;
 import com.sansilvestre.desktop.app.launch.screen.LaunchScreen;
 
 import java.awt.*;
@@ -217,7 +218,7 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
 
     @Override
     public void onSignInSuccess() {
-        System.out.println("Acceso Exitoso");
+        NavigationController.getInstance().navigateTo(new DashboardScreen());
     }
 
     @Override
