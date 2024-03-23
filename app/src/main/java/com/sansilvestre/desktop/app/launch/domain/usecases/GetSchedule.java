@@ -1,7 +1,7 @@
 package com.sansilvestre.desktop.app.launch.domain.usecases;
 
 import com.sansilvestre.desktop.app.launch.domain.model.Schedule;
-import com.sansilvestre.desktop.app.launch.screens.viewmodels.callbacks.GetScheduleCallback;
+import com.sansilvestre.desktop.app.launch.screen.viewmodel.callback.GetScheduleCallback;
 
 import java.time.LocalTime;
 

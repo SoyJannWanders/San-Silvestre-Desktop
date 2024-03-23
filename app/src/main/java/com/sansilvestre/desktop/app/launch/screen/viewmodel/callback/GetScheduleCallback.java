@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.launch.screens.viewmodels.callbacks;
+package com.sansilvestre.desktop.app.launch.screen.viewmodel.callback;
 
 public interface GetScheduleCallback {
 

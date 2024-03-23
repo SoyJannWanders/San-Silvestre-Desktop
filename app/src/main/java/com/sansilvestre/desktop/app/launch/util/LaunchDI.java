@@ -1,7 +1,7 @@
 package com.sansilvestre.desktop.app.launch.util;
 
 import com.sansilvestre.desktop.app.launch.domain.usecases.GetSchedule;
-import com.sansilvestre.desktop.app.launch.screens.viewmodels.LaunchViewModel;
+import com.sansilvestre.desktop.app.launch.screen.viewmodel.LaunchViewModel;
 
 public class LaunchDI {
 

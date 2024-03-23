@@ -1,15 +1,14 @@
-package com.sansilvestre.desktop.app.launch.screens.viewmodels;
+package com.sansilvestre.desktop.app.launch.screen.viewmodel;
 
 import com.sansilvestre.desktop.app.launch.domain.usecases.GetSchedule;
-import com.sansilvestre.desktop.app.launch.domain.model.Schedule;
-import com.sansilvestre.desktop.app.launch.screens.LaunchEvents;
-import com.sansilvestre.desktop.app.launch.screens.viewmodels.callbacks.GetScheduleCallback;
+import com.sansilvestre.desktop.app.launch.screen.LaunchEvent;
+import com.sansilvestre.desktop.app.launch.screen.viewmodel.callback.GetScheduleCallback;
 
 import java.time.LocalTime;
 
 public class LaunchViewModel {
 
-    private LaunchEvents event;
+    private LaunchEvent event;
 
     private final GetSchedule getSchedule;
 
@@ -17,7 +16,7 @@ public class LaunchViewModel {
         this.getSchedule = getSchedule;
     }
 
-    public void setEvent(LaunchEvents event) {
+    public void setEvent(LaunchEvent event) {
         this.event = event;
     }
 

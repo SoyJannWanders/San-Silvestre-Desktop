@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.launch.screens.resources;
+package com.sansilvestre.desktop.app.launch.screen.resource;
 
 import com.sansilvestre.desktop.app.Language;
 
@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class LaunchStrings {
 
-    private static final String LAUNCH_BUNDLE = Language.getSystemLanguage() + "Launch";
+    private static final String LAUNCH_BUNDLE = Language.getSystemLanguage() + "LaunchStrings";
 
     public static final ResourceBundle LAUNCH_STRINGS = ResourceBundle.getBundle(LAUNCH_BUNDLE);
 

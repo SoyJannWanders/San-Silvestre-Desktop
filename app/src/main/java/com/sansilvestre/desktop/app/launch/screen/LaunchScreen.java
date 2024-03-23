@@ -1,18 +1,18 @@
-package com.sansilvestre.desktop.app.launch.screens;
+package com.sansilvestre.desktop.app.launch.screen;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.NavigationController;
 import com.sansilvestre.desktop.app.AppStrings;
 import com.sansilvestre.desktop.app.Theme;
-import com.sansilvestre.desktop.app.auth.screens.AuthScreen;
-import com.sansilvestre.desktop.app.launch.screens.resources.LaunchStrings;
+import com.sansilvestre.desktop.app.auth.screen.AuthScreen;
+import com.sansilvestre.desktop.app.launch.screen.resource.LaunchStrings;
 import com.sansilvestre.desktop.app.launch.util.LaunchDI;
-import com.sansilvestre.desktop.app.launch.screens.viewmodels.LaunchViewModel;
+import com.sansilvestre.desktop.app.launch.screen.viewmodel.LaunchViewModel;
 
 import java.awt.*;
 import java.time.LocalTime;
 
-public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
+public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
 
     private final LaunchDI injector = LaunchDI.getInstance();
 
@@ -41,6 +41,7 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
         scheduleLabel = new javax.swing.JLabel();
         scheduleInput = new javax.swing.JComboBox<>();
         employeeScreenButton = new javax.swing.JButton();
+        authScreenConteiner = new javax.swing.JPanel();
         authScreenLabel = new javax.swing.JLabel();
         authScreenButton = new javax.swing.JButton();
         subConteiner = new javax.swing.JPanel();
@@ -83,20 +84,23 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
             }
         });
 
+        authScreenConteiner.setPreferredSize(new java.awt.Dimension(384, 23));
+        authScreenConteiner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+
         authScreenLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         authScreenLabel.setText("jLabel6");
         authScreenLabel.setMaximumSize(new java.awt.Dimension(192, 16));
-        authScreenLabel.setPreferredSize(new java.awt.Dimension(192, 16));
+        authScreenConteiner.add(authScreenLabel);
 
         authScreenButton.setText("jButton2");
         authScreenButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         authScreenButton.setMaximumSize(new java.awt.Dimension(192, 23));
-        authScreenButton.setPreferredSize(new java.awt.Dimension(192, 23));
         authScreenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 authScreenButtonActionPerformed(evt);
             }
         });
+        authScreenConteiner.add(authScreenButton);
 
         javax.swing.GroupLayout mainConteinerLayout = new javax.swing.GroupLayout(mainConteiner);
         mainConteiner.setLayout(mainConteinerLayout);
@@ -104,17 +108,15 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
             mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainConteinerLayout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(mainConteinerLayout.createSequentialGroup()
-                        .addComponent(authScreenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(authScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scheduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scheduleInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scheduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scheduleInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         mainConteinerLayout.setVerticalGroup(
@@ -130,19 +132,17 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
                 .addComponent(scheduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(scheduleInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(24, 24, 24)
                 .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(authScreenLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(authScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
         );
 
         subConteiner.setName(""); // NOI18N
         subConteiner.setPreferredSize(new java.awt.Dimension(688, 700));
 
-        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/daniil-silantev-F6Da4r2x5to-unsplash.jpg"))); // NOI18N
+        //image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/daniil-silantev-F6Da4r2x5to-unsplash.jpg"))); // NOI18N
         image.setMinimumSize(new java.awt.Dimension(560, 572));
         image.setPreferredSize(new java.awt.Dimension(688, 700));
 
@@ -189,10 +189,10 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
         employeeScreenButton.setText(LaunchStrings.getEmployeeScreenButton());
         authScreenLabel.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
         authScreenLabel.setText(LaunchStrings.getAuthScreenLabel());
-        authScreenButton.setText(LaunchStrings.getAuthScreenButton());
+        authScreenButton.putClientProperty(FlatClientProperties.STYLE, Theme.applySupportingButtonStyle());
         authScreenButton.setContentAreaFilled(false);
         authScreenButton.setCursor(HAND_CURSOR);
-        authScreenButton.putClientProperty(FlatClientProperties.STYLE, Theme.applySupportingButtonStyle());
+        authScreenButton.setText(LaunchStrings.getAuthScreenButton());
     }
 
     private void loadUIData() {
@@ -215,6 +215,7 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvents {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton authScreenButton;
+    private javax.swing.JPanel authScreenConteiner;
     private javax.swing.JLabel authScreenLabel;
     private javax.swing.JLabel body;
     private javax.swing.JButton employeeScreenButton;

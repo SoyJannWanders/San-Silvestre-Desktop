@@ -7,7 +7,7 @@ package com.sansilvestre.desktop.app;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.sansilvestre.desktop.app.launch.screens.LaunchScreen;
+import com.sansilvestre.desktop.app.launch.screen.LaunchScreen;
 
 import javax.swing.*;
 import java.awt.*;
