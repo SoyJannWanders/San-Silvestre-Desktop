@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class AuthStrings {
 
-    private static final String AUTH_BUNDLE = Language.getSystemLanguage() + "AuthStrings";
+    private static final String AUTH_BUNDLE = Language.getStringLanguage() + "AuthStrings";
 
     private static final ResourceBundle AUTH_STRINGS = ResourceBundle.getBundle(AUTH_BUNDLE);
 

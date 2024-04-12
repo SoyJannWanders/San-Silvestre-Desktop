@@ -1,6 +1,6 @@
 package com.sansilvestre.desktop.app.launch.screen.viewmodel;
 
-import com.sansilvestre.desktop.app.launch.domain.usecases.GetSchedule;
+import com.sansilvestre.desktop.app.launch.domain.usecase.GetSchedule;
 import com.sansilvestre.desktop.app.launch.screen.LaunchEvent;
 import com.sansilvestre.desktop.app.launch.screen.viewmodel.callback.GetScheduleCallback;
 

@@ -3,7 +3,7 @@
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1200, 700]"/>
+      <Dimension value="[896, 640]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -29,10 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="mainConteiner" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-          </Group>
+          <Component id="mainConteiner" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -40,10 +37,10 @@
     <Container class="javax.swing.JPanel" name="mainConteiner">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[512, 700]"/>
+          <Dimension value="[384, 640]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[512, 700]"/>
+          <Dimension value="[384, 640]"/>
         </Property>
       </Properties>
 
@@ -51,7 +48,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="launchScreenConteiner" min="-2" max="-2" attributes="0"/>
                       <Component id="signInButton" min="-2" max="-2" attributes="0"/>
@@ -63,14 +60,14 @@
                       <Component id="headline" min="-2" max="-2" attributes="0"/>
                       <Component id="logo" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="logo" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="headline" max="-2" attributes="0"/>
@@ -88,7 +85,7 @@
                   <Component id="signInButton" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="launchScreenConteiner" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,10 +95,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Logo"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
           </Properties>
         </Component>
@@ -109,10 +106,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Headline"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
           </Properties>
         </Component>
@@ -120,10 +117,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Body"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
           </Properties>
         </Component>
@@ -131,10 +128,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Email"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
           </Properties>
         </Component>
@@ -142,10 +139,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 2147483647]"/>
+              <Dimension value="[256, 2147483647]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 22]"/>
+              <Dimension value="[320, 22]"/>
             </Property>
           </Properties>
           <Events>
@@ -156,10 +153,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Password"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 16]"/>
+              <Dimension value="[320, 16]"/>
             </Property>
           </Properties>
         </Component>
@@ -167,10 +164,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jPasswordField1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 2147483647]"/>
+              <Dimension value="[320, 2147483647]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 22]"/>
+              <Dimension value="[320, 22]"/>
             </Property>
           </Properties>
         </Component>
@@ -178,10 +175,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jButton1"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 23]"/>
+              <Dimension value="[320, 23]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 23]"/>
+              <Dimension value="[320, 23]"/>
             </Property>
           </Properties>
           <Events>
@@ -190,8 +187,11 @@
         </Component>
         <Container class="javax.swing.JPanel" name="launchScreenConteiner">
           <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[320, 32767]"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[384, 23]"/>
+              <Dimension value="[320, 23]"/>
             </Property>
           </Properties>
 

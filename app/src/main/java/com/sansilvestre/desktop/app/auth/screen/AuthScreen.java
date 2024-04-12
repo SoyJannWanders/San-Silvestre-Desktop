@@ -48,30 +48,30 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
         launchScreenLabel = new javax.swing.JLabel();
         launchScreenButton = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1200, 700));
+        setPreferredSize(new java.awt.Dimension(896, 640));
 
-        mainConteiner.setMinimumSize(new java.awt.Dimension(512, 700));
-        mainConteiner.setPreferredSize(new java.awt.Dimension(512, 700));
+        mainConteiner.setMinimumSize(new java.awt.Dimension(384, 640));
+        mainConteiner.setPreferredSize(new java.awt.Dimension(384, 640));
 
         logo.setText("Logo");
-        logo.setMaximumSize(new java.awt.Dimension(384, 16));
-        logo.setPreferredSize(new java.awt.Dimension(384, 16));
+        logo.setMaximumSize(new java.awt.Dimension(320, 16));
+        logo.setPreferredSize(new java.awt.Dimension(320, 16));
 
         headline.setText("Headline");
-        headline.setMaximumSize(new java.awt.Dimension(384, 16));
-        headline.setPreferredSize(new java.awt.Dimension(384, 16));
+        headline.setMaximumSize(new java.awt.Dimension(320, 16));
+        headline.setPreferredSize(new java.awt.Dimension(320, 16));
 
         body.setText("Body");
-        body.setMaximumSize(new java.awt.Dimension(384, 16));
-        body.setPreferredSize(new java.awt.Dimension(384, 16));
+        body.setMaximumSize(new java.awt.Dimension(320, 16));
+        body.setPreferredSize(new java.awt.Dimension(320, 16));
 
         emailLabel.setText("Email");
-        emailLabel.setMaximumSize(new java.awt.Dimension(384, 16));
-        emailLabel.setPreferredSize(new java.awt.Dimension(384, 16));
+        emailLabel.setMaximumSize(new java.awt.Dimension(320, 16));
+        emailLabel.setPreferredSize(new java.awt.Dimension(320, 16));
 
         emailInput.setText("jTextField1");
-        emailInput.setMaximumSize(new java.awt.Dimension(384, 2147483647));
-        emailInput.setPreferredSize(new java.awt.Dimension(384, 22));
+        emailInput.setMaximumSize(new java.awt.Dimension(256, 2147483647));
+        emailInput.setPreferredSize(new java.awt.Dimension(320, 22));
         emailInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailInputActionPerformed(evt);
@@ -79,23 +79,24 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
         });
 
         passwordLabel.setText("Password");
-        passwordLabel.setMaximumSize(new java.awt.Dimension(384, 16));
-        passwordLabel.setPreferredSize(new java.awt.Dimension(384, 16));
+        passwordLabel.setMaximumSize(new java.awt.Dimension(320, 16));
+        passwordLabel.setPreferredSize(new java.awt.Dimension(320, 16));
 
         passwordInput.setText("jPasswordField1");
-        passwordInput.setMaximumSize(new java.awt.Dimension(384, 2147483647));
-        passwordInput.setPreferredSize(new java.awt.Dimension(384, 22));
+        passwordInput.setMaximumSize(new java.awt.Dimension(320, 2147483647));
+        passwordInput.setPreferredSize(new java.awt.Dimension(320, 22));
 
         signInButton.setText("jButton1");
-        signInButton.setMaximumSize(new java.awt.Dimension(384, 23));
-        signInButton.setPreferredSize(new java.awt.Dimension(384, 23));
+        signInButton.setMaximumSize(new java.awt.Dimension(320, 23));
+        signInButton.setPreferredSize(new java.awt.Dimension(320, 23));
         signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signInButtonActionPerformed(evt);
             }
         });
 
-        launchScreenConteiner.setPreferredSize(new java.awt.Dimension(384, 23));
+        launchScreenConteiner.setMaximumSize(new java.awt.Dimension(320, 32767));
+        launchScreenConteiner.setPreferredSize(new java.awt.Dimension(320, 23));
         launchScreenConteiner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
         launchScreenLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -118,7 +119,7 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
         mainConteinerLayout.setHorizontalGroup(
             mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(launchScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,12 +130,12 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
                     .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(headline, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
         mainConteinerLayout.setVerticalGroup(
             mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(32, 32, 32)
                 .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,7 +153,7 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
                 .addComponent(signInButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(launchScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -165,9 +166,7 @@ public class AuthScreen extends javax.swing.JPanel implements AuthEvent {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -1,6 +1,7 @@
 package com.sansilvestre.desktop.app.auth.data.source.remote;
 
-import com.sansilvestre.desktop.app.Database;
+import com.sansilvestre.desktop.app.Api;
+import com.sansilvestre.desktop.app.Storage;
 import com.sansilvestre.desktop.app.auth.screen.viewmodel.callback.SignInCallback;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public class SignInService {
     private final Logger logger = Logger.getLogger(SignInService.class.getName());
 
     public void signIn(String username, String password, SignInCallback callback) {
-        try (Connection connection = DriverManager.getConnection(Database.LOCAL_URL, Database.LOCAL_USER, Database.LOCAL_PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(Storage.STORAGE_URL, Storage.STORAGE_USER, Storage.STORAGE_PASSWORD)) {
             String query = "SELECT * FROM user WHERE Username = ? AND Password = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);
@@ -20,6 +21,8 @@ public class SignInService {
                     if (resultSet.next()) {
                         callback.onSuccess();
                     } else {
+                        System.out.println(username);
+                        System.out.println(password);
                         callback.onFailure();
                     }
                 }

@@ -45,46 +45,45 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
         authScreenLabel = new javax.swing.JLabel();
         authScreenButton = new javax.swing.JButton();
         subConteiner = new javax.swing.JPanel();
-        image = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1200, 700));
+        setPreferredSize(new java.awt.Dimension(896, 640));
 
-        mainConteiner.setPreferredSize(new java.awt.Dimension(512, 700));
+        mainConteiner.setPreferredSize(new java.awt.Dimension(384, 640));
 
         logo.setText("Logo");
-        logo.setMaximumSize(new java.awt.Dimension(384, 16));
-        logo.setPreferredSize(new java.awt.Dimension(384, 16));
+        logo.setMaximumSize(new java.awt.Dimension(320, 16));
+        logo.setPreferredSize(new java.awt.Dimension(320, 16));
 
         headline.setText("Headline");
-        headline.setMaximumSize(new java.awt.Dimension(384, 16));
-        headline.setPreferredSize(new java.awt.Dimension(384, 16));
+        headline.setMaximumSize(new java.awt.Dimension(128, 16));
+        headline.setPreferredSize(new java.awt.Dimension(128, 16));
 
         body.setText("Body");
-        body.setMaximumSize(new java.awt.Dimension(384, 16));
-        body.setPreferredSize(new java.awt.Dimension(384, 16));
+        body.setMaximumSize(new java.awt.Dimension(128, 16));
+        body.setPreferredSize(new java.awt.Dimension(128, 16));
 
         scheduleLabel.setText("Schedule");
-        scheduleLabel.setMaximumSize(new java.awt.Dimension(384, 16));
+        scheduleLabel.setMaximumSize(new java.awt.Dimension(128, 16));
         scheduleLabel.setMinimumSize(new java.awt.Dimension(16, 16));
         scheduleLabel.setOpaque(true);
-        scheduleLabel.setPreferredSize(new java.awt.Dimension(384, 16));
+        scheduleLabel.setPreferredSize(new java.awt.Dimension(128, 16));
 
         scheduleInput.setEditable(true);
         scheduleInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno 1 ~ 22:30 - 7:00", "Turno 2 ~ 7:00 - 14:00", "Turno 3 ~ 14:00 - 22:30" }));
-        scheduleInput.setMaximumSize(new java.awt.Dimension(384, 32767));
-        scheduleInput.setPreferredSize(new java.awt.Dimension(384, 22));
+        scheduleInput.setMaximumSize(new java.awt.Dimension(128, 32767));
+        scheduleInput.setPreferredSize(new java.awt.Dimension(128, 22));
 
         employeeScreenButton.setText("jButton1");
-        employeeScreenButton.setMaximumSize(new java.awt.Dimension(384, 23));
-        employeeScreenButton.setPreferredSize(new java.awt.Dimension(384, 23));
+        employeeScreenButton.setMaximumSize(new java.awt.Dimension(128, 23));
+        employeeScreenButton.setPreferredSize(new java.awt.Dimension(128, 23));
         employeeScreenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeScreenButtonActionPerformed(evt);
             }
         });
 
-        authScreenConteiner.setPreferredSize(new java.awt.Dimension(384, 23));
+        authScreenConteiner.setPreferredSize(new java.awt.Dimension(320, 23));
         authScreenConteiner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
         authScreenLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -107,7 +106,7 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
         mainConteinerLayout.setHorizontalGroup(
             mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -117,12 +116,12 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
                         .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(scheduleInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         mainConteinerLayout.setVerticalGroup(
             mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(32, 32, 32)
                 .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,28 +135,21 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
                 .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(32, 32, 32))
         );
 
         subConteiner.setName(""); // NOI18N
-        subConteiner.setPreferredSize(new java.awt.Dimension(688, 700));
-
-        //image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/daniil-silantev-F6Da4r2x5to-unsplash.jpg"))); // NOI18N
-        image.setMinimumSize(new java.awt.Dimension(560, 572));
-        image.setPreferredSize(new java.awt.Dimension(688, 700));
+        subConteiner.setPreferredSize(new java.awt.Dimension(640, 640));
 
         javax.swing.GroupLayout subConteinerLayout = new javax.swing.GroupLayout(subConteiner);
         subConteiner.setLayout(subConteinerLayout);
         subConteinerLayout.setHorizontalGroup(
             subConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subConteinerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         subConteinerLayout.setVerticalGroup(
             subConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -220,7 +212,6 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
     private javax.swing.JLabel body;
     private javax.swing.JButton employeeScreenButton;
     private javax.swing.JLabel headline;
-    private javax.swing.JLabel image;
     private javax.swing.JLabel logo;
     private javax.swing.JPanel mainConteiner;
     private javax.swing.JComboBox<String> scheduleInput;

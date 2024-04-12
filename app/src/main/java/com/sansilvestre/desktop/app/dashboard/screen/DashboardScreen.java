@@ -5,26 +5,84 @@
 package com.sansilvestre.desktop.app.dashboard.screen;
 
 import com.sansilvestre.desktop.app.dashboard.screen.component.AdministratorMenuComponent;
-import com.sansilvestre.desktop.app.product.screen.ProductScreen;
-import java.awt.BorderLayout;
+import com.sansilvestre.desktop.app.dashboard.util.KeyBinds;
+import com.sansilvestre.desktop.app.product.create.NewProductWindow;
+import com.sansilvestre.desktop.app.product.main.screen.ProductFragment;
+
 import java.awt.Component;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  *
  * @author Jan
  */
-public class DashboardScreen extends javax.swing.JPanel {
+public class DashboardScreen extends javax.swing.JPanel implements KeyListener {
 
     private AdministratorMenuComponent adminsMenuComponent = new AdministratorMenuComponent();
     
-    private ProductScreen productScreen = new ProductScreen();
+    private ProductFragment productScreen = new ProductFragment();
     
     /**
      * Creates new form DashboardScreen
      */
     public DashboardScreen() {
+        KeyBinds.getInstance().setComponent(this);
         initComponents();
         initScreen();
+        addKeyListener(this);
+        setFocusable(true);
+        menuSection.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("Menu");
+            }
+        });
+        menuSection.setFocusable(true);
+        contentSection.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("Content");
+            }
+        });
+        contentSection.setFocusable(true);
+        contentSection.requestFocusInWindow();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("Dashboard");
+        if (e.getKeyCode() == KeyEvent.VK_ADD) {
+            NewProductWindow.getInstance().invoke();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 
     /**
@@ -39,31 +97,32 @@ public class DashboardScreen extends javax.swing.JPanel {
         menuSection = new javax.swing.JPanel();
         contentSection = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(1200, 700));
+        setPreferredSize(new java.awt.Dimension(896, 640));
 
-        menuSection.setBackground(new java.awt.Color(255, 255, 51));
-        menuSection.setPreferredSize(new java.awt.Dimension(256, 700));
+        menuSection.setFocusable(false);
+        menuSection.setMinimumSize(new java.awt.Dimension(0, 0));
+        menuSection.setPreferredSize(new java.awt.Dimension(128, 640));
 
         javax.swing.GroupLayout menuSectionLayout = new javax.swing.GroupLayout(menuSection);
         menuSection.setLayout(menuSectionLayout);
         menuSectionLayout.setHorizontalGroup(
             menuSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
+            .addGap(0, 128, Short.MAX_VALUE)
         );
         menuSectionLayout.setVerticalGroup(
             menuSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        contentSection.setBackground(new java.awt.Color(255, 255, 51));
-        contentSection.setMinimumSize(new java.awt.Dimension(944, 700));
-        contentSection.setPreferredSize(new java.awt.Dimension(944, 700));
+        contentSection.setFocusable(false);
+        contentSection.setMinimumSize(new java.awt.Dimension(0, 0));
+        contentSection.setPreferredSize(new java.awt.Dimension(768, 640));
 
         javax.swing.GroupLayout contentSectionLayout = new javax.swing.GroupLayout(contentSection);
         contentSection.setLayout(contentSectionLayout);
         contentSectionLayout.setHorizontalGroup(
             contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
         contentSectionLayout.setVerticalGroup(
             contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,8 +136,7 @@ public class DashboardScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuSection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contentSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(contentSection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,19 +154,42 @@ public class DashboardScreen extends javax.swing.JPanel {
     }
     
     private void insertMenu(Component menu) {
-        menu.setSize(256, 700);
-        menu.setLocation(0, 0);
         menuSection.removeAll();
-        menuSection.add(menu, new BorderLayout());
+        javax.swing.GroupLayout menuSectionLayout = new javax.swing.GroupLayout(menuSection);
+        menuSection.setLayout(menuSectionLayout);
+        menuSectionLayout.setHorizontalGroup(
+            menuSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuSectionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        menuSectionLayout.setVerticalGroup(
+            menuSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuSectionLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         menuSection.revalidate();
         menuSection.repaint();
     }
 
     private void insertContent(Component content) {
-        content.setSize(944, 700);
-        content.setLocation(0, 0);
         contentSection.removeAll();
-        contentSection.add(content);
+        javax.swing.GroupLayout contentSectionLayout = new javax.swing.GroupLayout(contentSection);
+        contentSection.setLayout(contentSectionLayout);
+        contentSectionLayout.setHorizontalGroup(
+            contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentSectionLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+        contentSectionLayout.setVerticalGroup(
+            contentSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentSectionLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         contentSection.revalidate();
         contentSection.repaint();
     } 

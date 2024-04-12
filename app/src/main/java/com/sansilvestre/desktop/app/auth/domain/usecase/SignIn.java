@@ -1,6 +1,6 @@
 package com.sansilvestre.desktop.app.auth.domain.usecase;
 
-import com.sansilvestre.desktop.app.Input;
+import com.sansilvestre.desktop.app.Filter;
 import com.sansilvestre.desktop.app.auth.domain.repository.IAuthRepository;
 import com.sansilvestre.desktop.app.auth.screen.viewmodel.callback.SignInCallback;
 
@@ -13,7 +13,7 @@ public class SignIn {
     }
 
     public void execute(String username, String password, SignInCallback callback) {
-        if (Input.isValidInput(username) && Input.isValidInput(password)) {
+        if (Filter.isValidInput(username) && Filter.isValidInput(password)) {
             callback.onLoading();
             repository.signIn(username, password, callback);
         } else
