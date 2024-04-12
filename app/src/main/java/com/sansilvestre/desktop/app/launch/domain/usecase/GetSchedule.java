@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.launch.domain.usecases;
+package com.sansilvestre.desktop.app.launch.domain.usecase;
 
 import com.sansilvestre.desktop.app.launch.domain.model.Schedule;
 import com.sansilvestre.desktop.app.launch.screen.viewmodel.callback.GetScheduleCallback;
