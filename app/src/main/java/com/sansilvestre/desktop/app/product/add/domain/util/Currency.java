@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.product.create.domain.util;
+package com.sansilvestre.desktop.app.product.add.domain.util;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

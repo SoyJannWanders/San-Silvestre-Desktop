@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductApi {
 
     public Response<List<Product>> searchProduct(String query) {
-        try (Connection connection = DriverManager.getConnection(Storage.STORAGE_URL, Storage.STORAGE_USER, Storage.STORAGE_PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(Api.API_URL, Api.API_USER, Api.API_PASSWORD)) {
             try (PreparedStatement statement = connection.prepareStatement(ProductQuery.SELECT_PRODUCT_BY_LABEL_OR_BARCODE)) {
                 statement.setString(1, "%" + query + "%");
                 statement.setString(2, query + "%");

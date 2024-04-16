@@ -1,11 +1,12 @@
 package com.sansilvestre.desktop.app.product.main.screen;
 
-import com.sansilvestre.desktop.app.product.domain.model.Product;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModel;
 
 import java.util.List;
 
 public interface ProductState {
 
-    void fetchProductList(List<Product> list);
+    void onGetProductList(List<ProductTableModel> list);
+    void onProductSelected(ProductTableModel data);
 
 }

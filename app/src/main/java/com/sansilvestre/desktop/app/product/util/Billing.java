@@ -1,13 +1,17 @@
 package com.sansilvestre.desktop.app.product.util;
 
-import com.sansilvestre.desktop.app.product.create.domain.util.Currency;
-import com.sansilvestre.desktop.app.product.create.domain.util.Rounder;
-import com.sansilvestre.desktop.app.product.create.domain.util.Utilities;
+import com.sansilvestre.desktop.app.product.add.domain.util.Currency;
+import com.sansilvestre.desktop.app.product.add.domain.util.Rounder;
+import com.sansilvestre.desktop.app.product.add.domain.util.Utilities;
 
 public class Billing {
 
     private String input;
     private double cost = 0;
+
+    public void build(double cost) {
+
+    }
 
     public void build(String input) {
         String rawInput = Currency.removeFormat(input);
@@ -31,6 +35,11 @@ public class Billing {
 
     public String getFormattedCost() {
         return input.isEmpty() ? "$ 0,00" : Currency.format(getCost());
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+        input = Currency.format(cost);
     }
 
     public double getCost() {

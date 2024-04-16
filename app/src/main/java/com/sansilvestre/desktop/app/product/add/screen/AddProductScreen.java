@@ -1,11 +1,11 @@
-package com.sansilvestre.desktop.app.product.create.screen;
+package com.sansilvestre.desktop.app.product.add.screen;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.AppStrings;
 import com.sansilvestre.desktop.app.Filter;
 import com.sansilvestre.desktop.app.QuickNavigation;
 import com.sansilvestre.desktop.app.Theme;
-import com.sansilvestre.desktop.app.product.create.domain.model.ProductFormData;
+import com.sansilvestre.desktop.app.product.add.domain.model.ProductFormData;
 import com.sansilvestre.desktop.app.product.screen.resource.NewProductScreenStrings;
 import com.sansilvestre.desktop.app.product.main.module.ProductModule;
 

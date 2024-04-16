@@ -1,9 +1,9 @@
-package com.sansilvestre.desktop.app.product.create.screen;
+package com.sansilvestre.desktop.app.product.add.screen;
 
-import com.sansilvestre.desktop.app.product.create.domain.usecase.InsertProductUseCase;
-import com.sansilvestre.desktop.app.product.create.domain.util.DateParser;
-import com.sansilvestre.desktop.app.product.create.domain.util.Office;
-import com.sansilvestre.desktop.app.product.create.domain.util.Utilities;
+import com.sansilvestre.desktop.app.product.add.domain.usecase.InsertProductUseCase;
+import com.sansilvestre.desktop.app.product.add.domain.util.DateParser;
+import com.sansilvestre.desktop.app.product.add.domain.util.Office;
+import com.sansilvestre.desktop.app.product.add.domain.util.Utilities;
 import com.sansilvestre.desktop.app.product.util.Billing;
 import com.sansilvestre.desktop.app.product.util.Response;
 

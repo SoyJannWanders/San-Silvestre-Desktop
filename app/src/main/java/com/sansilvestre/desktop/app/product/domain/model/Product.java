@@ -1,6 +1,6 @@
 package com.sansilvestre.desktop.app.product.domain.model;
 
-import com.sansilvestre.desktop.app.product.create.domain.util.Currency;
+import com.sansilvestre.desktop.app.product.add.domain.util.Currency;
 
 import java.time.LocalDate;
 

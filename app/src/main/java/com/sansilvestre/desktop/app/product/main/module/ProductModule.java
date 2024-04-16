@@ -4,8 +4,8 @@ import com.sansilvestre.desktop.app.product.main.data.repository.ProductReposito
 import com.sansilvestre.desktop.app.product.main.data.source.local.ProductStorage;
 import com.sansilvestre.desktop.app.product.main.data.source.remote.ProductApi;
 import com.sansilvestre.desktop.app.product.main.domain.repository.ProductRepository;
-import com.sansilvestre.desktop.app.product.create.domain.usecase.InsertProductUseCase;
-import com.sansilvestre.desktop.app.product.create.screen.AddProductViewModel;
+import com.sansilvestre.desktop.app.product.add.domain.usecase.InsertProductUseCase;
+import com.sansilvestre.desktop.app.product.add.screen.AddProductViewModel;
 import com.sansilvestre.desktop.app.product.main.domain.usecase.GetProductListUseCase;
 import com.sansilvestre.desktop.app.product.main.domain.usecase.SearchProductUseCase;
 import com.sansilvestre.desktop.app.product.main.screen.ProductViewModel;

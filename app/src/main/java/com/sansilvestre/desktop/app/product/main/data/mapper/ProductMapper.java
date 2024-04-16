@@ -1,6 +1,7 @@
 package com.sansilvestre.desktop.app.product.main.data.mapper;
 
 import com.sansilvestre.desktop.app.product.domain.model.Product;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModel;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -20,6 +21,18 @@ public class ProductMapper {
         statement.setDate(9, Date.valueOf(product.getAddedDate()));
         statement.setDate(10, Date.valueOf(product.getUpdatedDate()));
         statement.setBoolean(11, product.isActive());
+    }
+
+    public static Object[] toObject(ProductTableModel product) {
+        System.out.println(product.getName());
+        return new Object[]{
+                product.getStock(),
+                product.getName(),
+                product.getBarcode(),
+                product.getCost(),
+                product.getRoundedPrice(),
+                product.getCategory()
+        };
     }
 
 }

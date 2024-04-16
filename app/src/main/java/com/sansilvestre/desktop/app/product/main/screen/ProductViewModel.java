@@ -1,10 +1,14 @@
 package com.sansilvestre.desktop.app.product.main.screen;
 
 import com.sansilvestre.desktop.app.product.domain.model.Product;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModel;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModelList;
 import com.sansilvestre.desktop.app.product.main.domain.usecase.GetProductListUseCase;
 import com.sansilvestre.desktop.app.product.main.domain.usecase.SearchProductUseCase;
+import com.sansilvestre.desktop.app.product.util.Billing;
 import com.sansilvestre.desktop.app.product.util.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductViewModel {
@@ -15,7 +19,11 @@ public class ProductViewModel {
 
     private final GetProductListUseCase getProductListUseCase;
 
-    public ProductViewModel(SearchProductUseCase searchProductUseCase, GetProductListUseCase getProductListUseCase) {
+    private final Billing billing = new Billing();
+
+    public ProductViewModel(
+            SearchProductUseCase searchProductUseCase,
+            GetProductListUseCase getProductListUseCase) {
         this.searchProductUseCase = searchProductUseCase;
         this.getProductListUseCase = getProductListUseCase;
     }
@@ -25,19 +33,21 @@ public class ProductViewModel {
     }
 
     public void onEvent(ProductEvent event) {
-        if (event instanceof ProductEvent.SearchProduct) {
-            Response<List<Product>> response = searchProductUseCase.execute(((ProductEvent.SearchProduct) event).getQuery());
+        if (event instanceof ProductEvent.GetProductList) {
+            Response<List<Product>> response = getProductListUseCase.execute();
             if (response instanceof Response.Success<List<Product>>) {
-                state.fetchProductList(((Response.Success<List<Product>>) response).getObject());
+                List<Product> products = ((Response.Success<List<Product>>) response).getObject();
+                state.onGetProductList(ProductTableModelList.valueOf(products));
             }
             if (response instanceof Response.Failure<List<Product>>) {
                 System.out.println(((Response.Failure<List<Product>>) response).getException());
             }
         }
-        if (event instanceof ProductEvent.GetProductList) {
-            Response<List<Product>> response = getProductListUseCase.execute();
+        if (event instanceof ProductEvent.GetProductWithQuery) {
+            Response<List<Product>> response = searchProductUseCase.execute(((ProductEvent.GetProductWithQuery) event).getQuery());
             if (response instanceof Response.Success<List<Product>>) {
-                state.fetchProductList(((Response.Success<List<Product>>) response).getObject());
+                List<Product> products = ((Response.Success<List<Product>>) response).getObject();
+                state.onGetProductList(ProductTableModelList.valueOf(products));
             }
             if (response instanceof Response.Failure<List<Product>>) {
                 System.out.println(((Response.Failure<List<Product>>) response).getException());

@@ -6,7 +6,7 @@ package com.sansilvestre.desktop.app.dashboard.screen;
 
 import com.sansilvestre.desktop.app.dashboard.screen.component.AdministratorMenuComponent;
 import com.sansilvestre.desktop.app.dashboard.util.KeyBinds;
-import com.sansilvestre.desktop.app.product.create.NewProductWindow;
+import com.sansilvestre.desktop.app.product.add.AddProductWindow;
 import com.sansilvestre.desktop.app.product.main.screen.ProductFragment;
 
 import java.awt.Component;
@@ -77,7 +77,7 @@ public class DashboardScreen extends javax.swing.JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         System.out.println("Dashboard");
         if (e.getKeyCode() == KeyEvent.VK_ADD) {
-            NewProductWindow.getInstance().invoke();
+            AddProductWindow.getInstance().invoke();
         }
     }
 

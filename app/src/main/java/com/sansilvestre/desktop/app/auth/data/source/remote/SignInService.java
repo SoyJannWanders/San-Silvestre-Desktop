@@ -1,6 +1,5 @@
 package com.sansilvestre.desktop.app.auth.data.source.remote;
 
-import com.sansilvestre.desktop.app.Api;
 import com.sansilvestre.desktop.app.Storage;
 import com.sansilvestre.desktop.app.auth.screen.viewmodel.callback.SignInCallback;
 
@@ -12,7 +11,7 @@ public class SignInService {
     private final Logger logger = Logger.getLogger(SignInService.class.getName());
 
     public void signIn(String username, String password, SignInCallback callback) {
-        try (Connection connection = DriverManager.getConnection(Storage.STORAGE_URL, Storage.STORAGE_USER, Storage.STORAGE_PASSWORD)) {
+        try (Connection connection = DriverManager.getConnection(Storage.URL, Storage.USER, Storage.PASSWORD)) {
             String query = "SELECT * FROM user WHERE Username = ? AND Password = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);

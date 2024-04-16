@@ -1,19 +1,18 @@
-package com.sansilvestre.desktop.app.product.create;
+package com.sansilvestre.desktop.app.product.add;
 
-import com.sansilvestre.desktop.app.product.create.screen.AddProductScreen;
+import com.sansilvestre.desktop.app.product.add.screen.AddProductScreen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 
-public class NewProductWindow extends JFrame {
+public class AddProductWindow extends JFrame {
 
-    private static NewProductWindow instance;
+    private static AddProductWindow instance;
 
     private final short MIN_WIDTH = 384;
     private final short MIN_HEIGHT = 576;
 
-    public NewProductWindow() {
+    public AddProductWindow() {
         setSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setResizable(false);
@@ -23,14 +22,14 @@ public class NewProductWindow extends JFrame {
         pack();
     }
 
-    public static NewProductWindow getInstance() {
+    public static AddProductWindow getInstance() {
         if (instance == null)
-            instance = new NewProductWindow();
+            instance = new AddProductWindow();
         return instance;
     }
 
     public void invoke() {
-        EventQueue.invokeLater(() -> new NewProductWindow().setVisible(true));
+        EventQueue.invokeLater(() -> new AddProductWindow().setVisible(true));
     }
 
 }

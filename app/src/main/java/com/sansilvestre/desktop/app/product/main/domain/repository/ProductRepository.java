@@ -12,6 +12,7 @@ public interface ProductRepository {
     Response<List<Product>> getProductList();
     Response<List<Product>> getProductListByOffice(int OID);
 
+    Response<Void> addProductList(List<Product> list);
     Response<Void> addProduct(Product product);
 
 }

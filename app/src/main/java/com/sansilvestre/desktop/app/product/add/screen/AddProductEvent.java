@@ -1,6 +1,6 @@
-package com.sansilvestre.desktop.app.product.create.screen;
+package com.sansilvestre.desktop.app.product.add.screen;
 
-import com.sansilvestre.desktop.app.product.create.domain.model.ProductFormData;
+import com.sansilvestre.desktop.app.product.add.domain.model.ProductFormData;
 
 public abstract class AddProductEvent {
 

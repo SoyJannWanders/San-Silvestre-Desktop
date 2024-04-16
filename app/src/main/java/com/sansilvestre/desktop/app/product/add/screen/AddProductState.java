@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.product.create.screen;
+package com.sansilvestre.desktop.app.product.add.screen;
 
 public interface AddProductState {
 

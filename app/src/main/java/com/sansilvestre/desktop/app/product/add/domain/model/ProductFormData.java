@@ -1,4 +1,4 @@
-package com.sansilvestre.desktop.app.product.create.domain.model;
+package com.sansilvestre.desktop.app.product.add.domain.model;
 
 public class ProductFormData {
 

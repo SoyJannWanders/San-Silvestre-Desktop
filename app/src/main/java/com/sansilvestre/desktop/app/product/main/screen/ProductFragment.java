@@ -4,8 +4,10 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.AppStrings;
 import com.sansilvestre.desktop.app.Theme;
 import com.sansilvestre.desktop.app.dashboard.util.KeyBinds;
-import com.sansilvestre.desktop.app.product.create.NewProductWindow;
-import com.sansilvestre.desktop.app.product.create.domain.util.Currency;
+import com.sansilvestre.desktop.app.product.add.AddProductWindow;
+import com.sansilvestre.desktop.app.product.main.data.mapper.ProductMapper;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModel;
+import com.sansilvestre.desktop.app.product.main.domain.model.ProductTableModelList;
 import com.sansilvestre.desktop.app.product.main.module.ProductModule;
 import com.sansilvestre.desktop.app.product.domain.model.Product;
 import com.sansilvestre.desktop.app.product.screen.resource.ProductStrings;
@@ -41,7 +43,11 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
 
             @Override
             public void keyReleased(KeyEvent e) {
-                viewModel.onEvent(new ProductEvent.SearchProduct(seachInput.getText()));
+                if (seachInput.getText() != "") {
+                    viewModel.onEvent(new ProductEvent.GetProductWithQuery(seachInput.getText()));
+                } else {
+                    viewModel.onEvent(new ProductEvent.GetProductList());
+                }
             }
         });
     }
@@ -56,14 +62,14 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
     private void initComponents() {
 
         headline = new javax.swing.JLabel();
+        body = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         productList = new javax.swing.JTable();
         seachInput = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        activeFilter = new javax.swing.JComboBox<>();
+        categoryFilter = new javax.swing.JComboBox<>();
+        officeFilter = new javax.swing.JComboBox<>();
         productDetailsConteiner = new javax.swing.JPanel();
         name = new javax.swing.JLabel();
         barcodeLabel = new javax.swing.JLabel();
@@ -81,14 +87,15 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         price = new javax.swing.JLabel();
         roundedPrice = new javax.swing.JLabel();
         updateButton = new javax.swing.JButton();
-        updateStockButton = new javax.swing.JButton();
-        updatePriceButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(0, 0));
         setPreferredSize(new java.awt.Dimension(768, 640));
 
-        headline.setText("section");
+        headline.setText("Headline");
+
+        body.setText("Body");
 
         addButton.setText("jButton1");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,26 +104,19 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
             }
         });
 
-        deleteButton.setText("jButton1");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
-
         productList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "", "Stock", "Producto", "Codigo de Barras", "Precio C.", "Precio V.", "Categoria"
+                "Stock", "Producto", "Codigo de Barras", "Precio C.", "Precio V.", "Categoria"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -130,39 +130,36 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         productList.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(productList);
         if (productList.getColumnModel().getColumnCount() > 0) {
-            productList.getColumnModel().getColumn(0).setMinWidth(40);
-            productList.getColumnModel().getColumn(0).setPreferredWidth(40);
-            productList.getColumnModel().getColumn(0).setMaxWidth(40);
-            productList.getColumnModel().getColumn(1).setMinWidth(64);
-            productList.getColumnModel().getColumn(1).setPreferredWidth(64);
-            productList.getColumnModel().getColumn(1).setMaxWidth(64);
+            productList.getColumnModel().getColumn(0).setMinWidth(64);
+            productList.getColumnModel().getColumn(0).setPreferredWidth(64);
+            productList.getColumnModel().getColumn(0).setMaxWidth(64);
+            productList.getColumnModel().getColumn(1).setMinWidth(128);
+            productList.getColumnModel().getColumn(1).setPreferredWidth(256);
             productList.getColumnModel().getColumn(2).setMinWidth(128);
-            productList.getColumnModel().getColumn(2).setPreferredWidth(256);
-            productList.getColumnModel().getColumn(3).setMinWidth(128);
-            productList.getColumnModel().getColumn(3).setPreferredWidth(128);
-            productList.getColumnModel().getColumn(3).setMaxWidth(128);
+            productList.getColumnModel().getColumn(2).setPreferredWidth(128);
+            productList.getColumnModel().getColumn(2).setMaxWidth(128);
+            productList.getColumnModel().getColumn(3).setMinWidth(64);
+            productList.getColumnModel().getColumn(3).setPreferredWidth(64);
+            productList.getColumnModel().getColumn(3).setMaxWidth(64);
             productList.getColumnModel().getColumn(4).setMinWidth(64);
             productList.getColumnModel().getColumn(4).setPreferredWidth(64);
             productList.getColumnModel().getColumn(4).setMaxWidth(64);
-            productList.getColumnModel().getColumn(5).setMinWidth(64);
-            productList.getColumnModel().getColumn(5).setPreferredWidth(64);
-            productList.getColumnModel().getColumn(5).setMaxWidth(64);
-            productList.getColumnModel().getColumn(6).setMinWidth(128);
-            productList.getColumnModel().getColumn(6).setPreferredWidth(128);
-            productList.getColumnModel().getColumn(6).setMaxWidth(128);
+            productList.getColumnModel().getColumn(5).setMinWidth(128);
+            productList.getColumnModel().getColumn(5).setPreferredWidth(128);
+            productList.getColumnModel().getColumn(5).setMaxWidth(128);
         }
 
         seachInput.setText("jTextField1");
-        seachInput.setPreferredSize(new java.awt.Dimension(192, 22));
+        seachInput.setPreferredSize(new java.awt.Dimension(160, 22));
 
-        jComboBox1.setEditable(true);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        activeFilter.setEditable(true);
+        activeFilter.setPreferredSize(new java.awt.Dimension(96, 22));
 
-        jComboBox2.setEditable(true);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoryFilter.setEditable(true);
+        categoryFilter.setPreferredSize(new java.awt.Dimension(160, 22));
 
-        jComboBox3.setEditable(true);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        officeFilter.setEditable(true);
+        officeFilter.setPreferredSize(new java.awt.Dimension(160, 22));
 
         productDetailsConteiner.setPreferredSize(new java.awt.Dimension(59, 128));
 
@@ -201,15 +198,10 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         updateButton.setMinimumSize(new java.awt.Dimension(128, 23));
         updateButton.setPreferredSize(new java.awt.Dimension(128, 23));
 
-        updateStockButton.setText("jButton2");
-        updateStockButton.setMaximumSize(new java.awt.Dimension(128, 23));
-        updateStockButton.setMinimumSize(new java.awt.Dimension(128, 23));
-        updateStockButton.setPreferredSize(new java.awt.Dimension(128, 23));
-
-        updatePriceButton.setText("jButton3");
-        updatePriceButton.setMaximumSize(new java.awt.Dimension(128, 23));
-        updatePriceButton.setMinimumSize(new java.awt.Dimension(128, 23));
-        updatePriceButton.setPreferredSize(new java.awt.Dimension(128, 23));
+        deleteButton.setText("jButton3");
+        deleteButton.setMaximumSize(new java.awt.Dimension(128, 23));
+        deleteButton.setMinimumSize(new java.awt.Dimension(128, 23));
+        deleteButton.setPreferredSize(new java.awt.Dimension(128, 23));
 
         javax.swing.GroupLayout productDetailsConteinerLayout = new javax.swing.GroupLayout(productDetailsConteiner);
         productDetailsConteiner.setLayout(productDetailsConteinerLayout);
@@ -239,17 +231,16 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
                         .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(updatedDateLabel)
                             .addComponent(updatedDate))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cost)
                     .addComponent(roundedPrice)
                     .addComponent(price)
                     .addComponent(profit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateStockButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updatePriceButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
         productDetailsConteinerLayout.setVerticalGroup(
@@ -262,14 +253,13 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
                     .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(productDetailsConteinerLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(15, 15, 15)
                         .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(barcodeLabel)
                             .addComponent(categoryLabel)
                             .addComponent(stockLabel)
                             .addComponent(addedDateLabel)
-                            .addComponent(updatedDateLabel)
-                            .addComponent(updateStockButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(updatedDateLabel))
                         .addGroup(productDetailsConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(productDetailsConteinerLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
@@ -281,7 +271,7 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
                                     .addComponent(updatedDate)))
                             .addGroup(productDetailsConteinerLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(updatePriceButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(productDetailsConteinerLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(profit)
@@ -296,43 +286,48 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(productDetailsConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(headline)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(seachInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)))
-                .addGap(32, 32, 32))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(body)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(productDetailsConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(headline)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(seachInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(activeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categoryFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(officeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addButton)))
+                        .addGap(32, 32, 32))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(headline)
+                .addGap(4, 4, 4)
+                .addComponent(body)
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton)
-                    .addComponent(deleteButton)
-                    .addComponent(seachInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(activeFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoryFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(officeFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addButton))
+                    .addComponent(seachInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addComponent(productDetailsConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -341,9 +336,9 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
 
     private void stylizeComponents() {
         stylizeHeadline();
+        stylizeBody();
         stylizeSearchField();
         stylizeAddButton();
-        stylizeDeleteButton();
         stylizeTable();
         stylizeProductDetailsConteiner();
         stylizeProductLabel();
@@ -352,13 +347,17 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         stylizeStockSection();
         stylizeAddedDateSection();
         stylizeUpdatedDateSection();
-        stylizeUpdateStockButton();
         stylizeUpdatePriceButton();
     }
 
     private void stylizeHeadline() {
         headline.putClientProperty(FlatClientProperties.STYLE, Theme.applySectionStyle());
         headline.setText(ProductStrings.getSection());
+    }
+
+    private void stylizeBody() {
+        body.putClientProperty(FlatClientProperties.STYLE, Theme.applyBodyStyle());
+        body.setText(ProductStrings.getSentence());
     }
 
     private void stylizeSearchField() {
@@ -370,17 +369,12 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         addButton.setText(AppStrings.getAddButton());
     }
 
-    private void stylizeDeleteButton() {
-        deleteButton.putClientProperty(FlatClientProperties.STYLE, Theme.applyDeleteButtonStyle());
-        deleteButton.setText(AppStrings.getDeleteButton());
-    }
-
     private void stylizeTable() {
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
-        productList.getColumnModel().getColumn(1).setCellRenderer(center);
-        productList.getColumnModel().getColumn(3).setCellRenderer(center);
-        productList.getColumnModel().getColumn(6).setCellRenderer(center);
+        productList.getColumnModel().getColumn(0).setCellRenderer(center);
+        productList.getColumnModel().getColumn(2).setCellRenderer(center);
+        productList.getColumnModel().getColumn(5).setCellRenderer(center);
     }
 
     private void stylizeProductDetailsConteiner() {
@@ -416,41 +410,44 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
         addedDate.putClientProperty(FlatClientProperties.STYLE, Theme.applyLabelMediumStyle());
     }
 
-    private void stylizeUpdateStockButton() {
-        updateStockButton.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
-        updateStockButton.setText(ProductStrings.getUpdateStockButton());
-    }
-
     private void stylizeUpdatePriceButton() {
-        updatePriceButton.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
-        updatePriceButton.setText(ProductStrings.getUpdatePriceButton());
+        deleteButton.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
+        deleteButton.setText(ProductStrings.getUpdatePriceButton());
     }
 
     private void setup() {
-        initUIController();
-        onItemSelectedList();
+        viewModel.setState(this);
+        init();
     }
 
-    private void initUIController() {
-        viewModel.setState(this);
+    private void init() {
         viewModel.onEvent(new ProductEvent.GetProductList());
+        activeFilter.addItem(ProductStrings.getActiveItemFilter());
+        activeFilter.addItem(ProductStrings.getInactiveItemFilter());
+        categoryFilter.addItem(ProductStrings.getCategoryItemFilter());
+        officeFilter.addItem(ProductStrings.getOfficeItemFilter());
+    }
+
+    private void initProductDetailsSection(ProductTableModel product) {
+        name.setText(product.getName());
+        barcode.setText(product.getBarcode());
+        category.setText(product.getCategory());
+        stock.setText(product.getStock());
     }
 
     @Override
-    public void fetchProductList(List<Product> list) {
+    public void onGetProductList(List<ProductTableModel> list) {
         DefaultTableModel model = (DefaultTableModel) productList.getModel();
         model.setRowCount(0);
-        for (Product product: list) {
-            model.addRow(new Object[] {
-                    false,
-                    product.getStock(),
-                    product.getLabel(),
-                    product.getBarcode(),
-                    Currency.format(product.getCost()),
-                    123.2,
-                    product.getCategory().getValue()
-            });
+        initProductDetailsSection(list.getFirst());
+        for (ProductTableModel product: list) {
+            model.addRow(ProductMapper.toObject(product));
         }
+    }
+
+    @Override
+    public void onProductSelected(ProductTableModel data) {
+        onItemSelectedList();
     }
 
     private void onItemSelectedList() {
@@ -473,30 +470,27 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
     }
     
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        NewProductWindow.getInstance().invoke();
+        AddProductWindow.getInstance().invoke();
         KeyBinds.getInstance().restartKeyBindsService();
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        KeyBinds.getInstance().restartKeyBindsService();
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> activeFilter;
     private javax.swing.JButton addButton;
     private javax.swing.JLabel addedDate;
     private javax.swing.JLabel addedDateLabel;
     private javax.swing.JLabel barcode;
     private javax.swing.JLabel barcodeLabel;
+    private javax.swing.JLabel body;
     private javax.swing.JLabel category;
+    private javax.swing.JComboBox<String> categoryFilter;
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JLabel cost;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel headline;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel name;
+    private javax.swing.JComboBox<String> officeFilter;
     private javax.swing.JLabel price;
     private javax.swing.JPanel productDetailsConteiner;
     private javax.swing.JTable productList;
@@ -506,8 +500,6 @@ public class ProductFragment extends javax.swing.JPanel implements ProductState 
     private javax.swing.JLabel stock;
     private javax.swing.JLabel stockLabel;
     private javax.swing.JButton updateButton;
-    private javax.swing.JButton updatePriceButton;
-    private javax.swing.JButton updateStockButton;
     private javax.swing.JLabel updatedDate;
     private javax.swing.JLabel updatedDateLabel;
     // End of variables declaration//GEN-END:variables

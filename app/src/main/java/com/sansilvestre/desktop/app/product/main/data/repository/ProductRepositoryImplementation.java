@@ -21,9 +21,10 @@ public class ProductRepositoryImplementation implements ProductRepository {
 
     @Override
     public Response<List<Product>> searchProduct(String query) {
-        Response<List<Product>> response = api.searchProduct(query);
+        Response<List<Product>> response = storage.searchProduct(query);
         if (response instanceof Response.Failure<List<Product>>) {
-            response = storage.searchProduct(query);
+            System.out.println("API Failure");
+            response = api.searchProduct(query);
             if (response instanceof Response.Failure<List<Product>>) {
                 return new Response.Failure<>("Code 302: ");
             }
@@ -34,7 +35,14 @@ public class ProductRepositoryImplementation implements ProductRepository {
     @Override
     public Response<List<Product>> getProductList() {
         Response<List<Product>> response = api.getProductList();
+        if (response instanceof Response.Success<List<Product>>) {
+            Response<List<Product>> finalResponse = response;
+            SyncTask.getInstance().execute(() -> {
+                    addProductList(((Response.Success<List<Product>>) finalResponse).getObject());
+            });
+        }
         if (response instanceof Response.Failure<List<Product>>) {
+            System.out.println("API Failure");
             response = storage.getProductList();
             if (response instanceof Response.Failure<List<Product>>) {
                 return new Response.Failure<>("Code 301: ");
@@ -46,6 +54,11 @@ public class ProductRepositoryImplementation implements ProductRepository {
     @Override
     public Response<List<Product>> getProductListByOffice(int OID) {
         return null;
+    }
+
+    @Override
+    public Response<Void> addProductList(List<Product> list) {
+        return storage.insertProductList(list);
     }
 
     @Override

@@ -2,6 +2,9 @@ package com.sansilvestre.desktop.app.product.main.data.source;
 
 public class ProductQuery {
 
+    public static final String SELECT_COUNT_BY_BARCODE =
+            "SELECT COUNT(*) FROM products WHERE barcode = ?";
+
     public static final String SELECT_PRODUCTS =
             "SELECT * FROM products";
 

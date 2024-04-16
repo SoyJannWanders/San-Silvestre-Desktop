@@ -1,6 +1,6 @@
-package com.sansilvestre.desktop.app.product.create.domain.usecase;
+package com.sansilvestre.desktop.app.product.add.domain.usecase;
 
-import com.sansilvestre.desktop.app.product.create.domain.model.ProductFormData;
+import com.sansilvestre.desktop.app.product.add.domain.model.ProductFormData;
 import com.sansilvestre.desktop.app.product.main.domain.repository.ProductRepository;
 import com.sansilvestre.desktop.app.product.domain.model.Product;
 import com.sansilvestre.desktop.app.product.util.Response;
