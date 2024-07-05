@@ -1,0 +1,21 @@
+package com.sansilvestre.desktop.app.user.domain.usecase;
+
+import com.sansilvestre.desktop.app.util.data.response.Response;
+import com.sansilvestre.desktop.app.user.domain.model.User;
+import com.sansilvestre.desktop.app.user.domain.repository.UserRepository;
+
+import java.util.List;
+
+public class GetUserList {
+
+    private final UserRepository repository;
+
+    public GetUserList(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    public Response<List<User>> execute() {
+        return repository.getUserList();
+    }
+
+}

@@ -1,155 +1,154 @@
 package com.sansilvestre.desktop.app.launch.screen;
 
-import com.formdev.flatlaf.FlatClientProperties;
 import com.sansilvestre.desktop.app.NavigationController;
-import com.sansilvestre.desktop.app.AppStrings;
-import com.sansilvestre.desktop.app.Theme;
-import com.sansilvestre.desktop.app.auth.screen.AuthScreen;
-import com.sansilvestre.desktop.app.launch.screen.resource.LaunchStrings;
-import com.sansilvestre.desktop.app.launch.util.LaunchDI;
-import com.sansilvestre.desktop.app.launch.screen.viewmodel.LaunchViewModel;
+import com.sansilvestre.desktop.app.NavigationData;
+import com.sansilvestre.desktop.app.shift.domain.model.Shift;
+import com.sansilvestre.desktop.app.util.log.Console;
+import com.sansilvestre.desktop.app.util.ui.Styles;
+import com.sansilvestre.desktop.app.launch.module.LaunchModule;
 
+import javax.swing.*;
 import java.awt.*;
-import java.time.LocalTime;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.net.URL;
+import java.util.List;
 
-public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
+public class LaunchScreen extends javax.swing.JPanel implements LaunchViewController {
 
-    private final LaunchDI injector = LaunchDI.getInstance();
+    private final LaunchViewModel viewModel;
 
-    private final LaunchViewModel viewModel = injector.provideLaunchViewModel();
-
-    private final Cursor HAND_CURSOR = new Cursor(Cursor.HAND_CURSOR);
+    private final Screen screen = new Screen();
+    private final Shortcut shortcut = new Shortcut();
 
     public LaunchScreen() {
-        setUpViewModel();
+        viewModel = LaunchModule.getInstance().provideLaunchViewModel();
         initComponents();
-        initUIStyles();
-        loadUIData();
-    }
-
-    private void setUpViewModel() {
-        viewModel.setEvent(this);
+        setup();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainConteiner = new javax.swing.JPanel();
+        formContainer = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
         headline = new javax.swing.JLabel();
         body = new javax.swing.JLabel();
-        scheduleLabel = new javax.swing.JLabel();
-        scheduleInput = new javax.swing.JComboBox<>();
-        employeeScreenButton = new javax.swing.JButton();
-        authScreenConteiner = new javax.swing.JPanel();
-        authScreenLabel = new javax.swing.JLabel();
-        authScreenButton = new javax.swing.JButton();
-        subConteiner = new javax.swing.JPanel();
+        shiftLabel = new javax.swing.JLabel();
+        cmbShifts = new javax.swing.JComboBox<>();
+        btnAccept = new javax.swing.JButton();
+        loginContainer = new javax.swing.JPanel();
+        loginLabel = new javax.swing.JLabel();
+        btnSignIn = new javax.swing.JButton();
+        beautifierContainer = new Background();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(896, 640));
 
-        mainConteiner.setPreferredSize(new java.awt.Dimension(384, 640));
+        formContainer.setPreferredSize(new java.awt.Dimension(416, 640));
 
-        logo.setText("Logo");
+        logo.setText("San Silvestre Store");
         logo.setMaximumSize(new java.awt.Dimension(320, 16));
         logo.setPreferredSize(new java.awt.Dimension(320, 16));
 
-        headline.setText("Headline");
+        headline.setText("¿Que tal estas?");
         headline.setMaximumSize(new java.awt.Dimension(128, 16));
         headline.setPreferredSize(new java.awt.Dimension(128, 16));
 
-        body.setText("Body");
+        body.setText("Seleccionamos automaticamente el turno para ti.");
         body.setMaximumSize(new java.awt.Dimension(128, 16));
         body.setPreferredSize(new java.awt.Dimension(128, 16));
 
-        scheduleLabel.setText("Schedule");
-        scheduleLabel.setMaximumSize(new java.awt.Dimension(128, 16));
-        scheduleLabel.setMinimumSize(new java.awt.Dimension(16, 16));
-        scheduleLabel.setOpaque(true);
-        scheduleLabel.setPreferredSize(new java.awt.Dimension(128, 16));
+        shiftLabel.setText("Turnos");
+        shiftLabel.setMaximumSize(new java.awt.Dimension(128, 16));
+        shiftLabel.setMinimumSize(new java.awt.Dimension(16, 16));
+        shiftLabel.setOpaque(true);
+        shiftLabel.setPreferredSize(new java.awt.Dimension(128, 16));
 
-        scheduleInput.setEditable(true);
-        scheduleInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turno 1 ~ 22:30 - 7:00", "Turno 2 ~ 7:00 - 14:00", "Turno 3 ~ 14:00 - 22:30" }));
-        scheduleInput.setMaximumSize(new java.awt.Dimension(128, 32767));
-        scheduleInput.setPreferredSize(new java.awt.Dimension(128, 22));
+        cmbShifts.setEditable(true);
+        cmbShifts.setMaximumSize(new java.awt.Dimension(128, 32767));
+        cmbShifts.setPreferredSize(new java.awt.Dimension(128, 22));
 
-        employeeScreenButton.setText("jButton1");
-        employeeScreenButton.setMaximumSize(new java.awt.Dimension(128, 23));
-        employeeScreenButton.setPreferredSize(new java.awt.Dimension(128, 23));
-        employeeScreenButton.addActionListener(new java.awt.event.ActionListener() {
+        btnAccept.setText("Abrir Caja");
+        btnAccept.setMaximumSize(new java.awt.Dimension(128, 23));
+        btnAccept.setPreferredSize(new java.awt.Dimension(128, 23));
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeScreenButtonActionPerformed(evt);
+                btnAcceptActionPerformed(evt);
             }
         });
 
-        authScreenConteiner.setPreferredSize(new java.awt.Dimension(320, 23));
-        authScreenConteiner.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        loginContainer.setPreferredSize(new java.awt.Dimension(320, 23));
+        loginContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
-        authScreenLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        authScreenLabel.setText("jLabel6");
-        authScreenLabel.setMaximumSize(new java.awt.Dimension(192, 16));
-        authScreenConteiner.add(authScreenLabel);
+        loginLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        loginLabel.setText("¿Tienes un Usuario?");
+        loginLabel.setMaximumSize(new java.awt.Dimension(192, 16));
+        loginContainer.add(loginLabel);
 
-        authScreenButton.setText("jButton2");
-        authScreenButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        authScreenButton.setMaximumSize(new java.awt.Dimension(192, 23));
-        authScreenButton.addActionListener(new java.awt.event.ActionListener() {
+        btnSignIn.setText("Sí, tengo un Usuario");
+        btnSignIn.setContentAreaFilled(false);
+        btnSignIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSignIn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnSignIn.setMaximumSize(new java.awt.Dimension(192, 23));
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                authScreenButtonActionPerformed(evt);
+                btnSignInActionPerformed(evt);
             }
         });
-        authScreenConteiner.add(authScreenButton);
+        loginContainer.add(btnSignIn);
 
-        javax.swing.GroupLayout mainConteinerLayout = new javax.swing.GroupLayout(mainConteiner);
-        mainConteiner.setLayout(mainConteinerLayout);
-        mainConteinerLayout.setHorizontalGroup(
-            mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout formContainerLayout = new javax.swing.GroupLayout(formContainer);
+        formContainer.setLayout(formContainerLayout);
+        formContainerLayout.setHorizontalGroup(
+            formContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formContainerLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(formContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loginContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(formContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(scheduleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(shiftLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(scheduleInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(cmbShifts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
-        mainConteinerLayout.setVerticalGroup(
-            mainConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainConteinerLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+        formContainerLayout.setVerticalGroup(
+            formContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formContainerLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addComponent(logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addComponent(headline, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(scheduleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(shiftLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addComponent(scheduleInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(employeeScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(authScreenConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addComponent(cmbShifts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnAccept, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                .addComponent(loginContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
         );
 
-        subConteiner.setName(""); // NOI18N
-        subConteiner.setPreferredSize(new java.awt.Dimension(640, 640));
+        beautifierContainer.setName(""); // NOI18N
+        beautifierContainer.setPreferredSize(new java.awt.Dimension(480, 640));
 
-        javax.swing.GroupLayout subConteinerLayout = new javax.swing.GroupLayout(subConteiner);
-        subConteiner.setLayout(subConteinerLayout);
-        subConteinerLayout.setHorizontalGroup(
-            subConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout beautifierContainerLayout = new javax.swing.GroupLayout(beautifierContainer);
+        beautifierContainer.setLayout(beautifierContainerLayout);
+        beautifierContainerLayout.setHorizontalGroup(
+            beautifierContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+        beautifierContainerLayout.setVerticalGroup(
+            beautifierContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 640, Short.MAX_VALUE)
-        );
-        subConteinerLayout.setVerticalGroup(
-            subConteinerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -157,65 +156,182 @@ public class LaunchScreen extends javax.swing.JPanel implements LaunchEvent {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(formContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(subConteiner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(beautifierContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(subConteiner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(formContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(beautifierContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initUIStyles() {
-        logo.putClientProperty(FlatClientProperties.STYLE, Theme.applyLogoStyle());
-        logo.setText(AppStrings.getAppName());
-        headline.putClientProperty(FlatClientProperties.STYLE, Theme.applyHeadlineStyle());
-        headline.setText(LaunchStrings.getHeadline());
-        body.putClientProperty(FlatClientProperties.STYLE, Theme.applyBodyStyle());
-        body.setText(LaunchStrings.getBody());
-        scheduleLabel.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
-        scheduleLabel.setText(LaunchStrings.getScheduleLabel());
-        employeeScreenButton.setText(LaunchStrings.getEmployeeScreenButton());
-        authScreenLabel.putClientProperty(FlatClientProperties.STYLE, Theme.applyDefaultStyle());
-        authScreenLabel.setText(LaunchStrings.getAuthScreenLabel());
-        authScreenButton.putClientProperty(FlatClientProperties.STYLE, Theme.applySupportingButtonStyle());
-        authScreenButton.setContentAreaFilled(false);
-        authScreenButton.setCursor(HAND_CURSOR);
-        authScreenButton.setText(LaunchStrings.getAuthScreenButton());
-    }
-
-    private void loadUIData() {
-        viewModel.getSchedule(LocalTime.now());
+    private void setup() {
+        screen.assembleComponents();
+        screen.initializeListeners();
+        shortcut.configure(this);
+        viewModel.setViewController(this);
+        viewModel.onEvent(new LaunchEvent.GetShiftList());
+        viewModel.onEvent(new LaunchEvent.GetCurrentShift());
     }
 
     @Override
-    public void onGetSchedule(String schedule) {
-        scheduleInput.setSelectedItem(schedule);
+    public void setShiftList(List<Shift> shifts) {
+        shifts.forEach(shift -> cmbShifts.addItem(shift));
     }
 
-    private void employeeScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeScreenButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_employeeScreenButtonActionPerformed
+    @Override
+    public void setShift(Shift shift) {
+        cmbShifts.setSelectedItem(shift);
+    }
 
-    private void authScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authScreenButtonActionPerformed
-        NavigationController.getInstance().navigateTo(new AuthScreen());
-    }//GEN-LAST:event_authScreenButtonActionPerformed
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        open();
+    }//GEN-LAST:event_btnAcceptActionPerformed
 
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        signIn();
+    }//GEN-LAST:event_btnSignInActionPerformed
+
+    private void open() {
+        Shift shift = (Shift) cmbShifts.getSelectedItem();
+        NavigationController.getInstance().navigate(NavigationController.Route.OPEN_SESSION_SCREEN, new NavigationData(
+                new Object[] { shift.getCheckoutId() }, new Class[] { Integer.class }
+        ));
+    }
+
+    private void signIn() {
+        NavigationController.getInstance().navigate(NavigationController.Route.AUTH_SCREEN, null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton authScreenButton;
-    private javax.swing.JPanel authScreenConteiner;
-    private javax.swing.JLabel authScreenLabel;
+    private javax.swing.JPanel beautifierContainer;
     private javax.swing.JLabel body;
-    private javax.swing.JButton employeeScreenButton;
+    private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnSignIn;
+    private javax.swing.JComboBox<Shift> cmbShifts;
+    private javax.swing.JPanel formContainer;
     private javax.swing.JLabel headline;
+    private javax.swing.JPanel loginContainer;
+    private javax.swing.JLabel loginLabel;
     private javax.swing.JLabel logo;
-    private javax.swing.JPanel mainConteiner;
-    private javax.swing.JComboBox<String> scheduleInput;
-    private javax.swing.JLabel scheduleLabel;
-    private javax.swing.JPanel subConteiner;
+    private javax.swing.JLabel shiftLabel;
     // End of variables declaration//GEN-END:variables
+
+    private class Screen {
+
+        public void assembleComponents() {
+
+            Styles.setStyleTo(logo, "logo");
+
+            Styles.setStyleTo(headline, "headline.large");
+
+            Styles.setStyleTo(shiftLabel, "label.small");
+
+            Styles.setStyleTo(cmbShifts, "combo.box.variant");
+
+            Styles.setStyleTo(btnSignIn, "button.text");
+
+        }
+
+        public void initializeListeners() {
+
+            cmbShifts.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (shortcut.isNotConfigured(e))
+                        e.consume();
+                }
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    e.consume();
+                }
+
+            });
+
+        }
+
+    }
+
+    private static class Background extends JPanel {
+
+        @Override
+        public void paint(Graphics g) {
+
+            setOpaque(false);
+
+            URL url = getClass().getResource("/drawable/logo.png");
+            if (url != null) {
+
+                Image image = new ImageIcon(url).getImage();
+
+                int panelWidth = getWidth();
+                int panelHeight = getHeight();
+                int imageWidth = image.getWidth(this);
+                int imageHeight = image.getHeight(this);
+
+                if (imageWidth > 0 && imageHeight > 0) {
+
+                    double aspectRatio = (double) imageWidth / imageHeight;
+
+                    int drawWidth, drawHeight;
+
+                    if (panelWidth / (double) panelHeight < aspectRatio) {
+                        drawWidth = panelWidth;
+                        drawHeight = (int) (panelWidth / aspectRatio);
+                    } else {
+                        drawHeight = panelHeight;
+                        drawWidth = (int) (panelHeight * aspectRatio);
+                    }
+
+                    int x = (panelWidth - drawWidth) / 2;
+                    int y = (panelHeight - drawHeight) / 2;
+
+                    g.drawImage(image, x, y, drawWidth, drawHeight, this);
+
+                }
+            }
+
+            super.paint(g);
+
+        }
+
+    }
+
+    private class Shortcut {
+
+        public void configure(JComponent component) {
+
+            InputMap input = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+            ActionMap actionMap = component.getActionMap();
+
+            final String OPEN = "open";
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), OPEN);
+            actionMap.put(OPEN, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    open();
+                }
+            });
+
+            final String SIGN_IN = "signIn";
+            input.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_DOWN_MASK), SIGN_IN);
+            actionMap.put(SIGN_IN, new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    signIn();
+                }
+            });
+
+        }
+
+        public boolean isNotConfigured(KeyEvent e) {
+            return e.getKeyCode() != KeyEvent.VK_ENTER;
+        }
+
+    }
+
 }

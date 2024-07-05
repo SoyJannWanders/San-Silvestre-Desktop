@@ -1,23 +1,18 @@
 package com.sansilvestre.desktop.app.auth.domain.usecase;
 
-import com.sansilvestre.desktop.app.Filter;
-import com.sansilvestre.desktop.app.auth.domain.repository.IAuthRepository;
-import com.sansilvestre.desktop.app.auth.screen.viewmodel.callback.SignInCallback;
+import com.sansilvestre.desktop.app.util.data.response.Response;
+import com.sansilvestre.desktop.app.auth.domain.repository.AuthRepository;
 
 public class SignIn {
 
-    private final IAuthRepository repository;
+    private final AuthRepository repository;
 
-    public SignIn(IAuthRepository repository) {
+    public SignIn(AuthRepository repository) {
         this.repository = repository;
     }
 
-    public void execute(String username, String password, SignInCallback callback) {
-        if (Filter.isValidInput(username) && Filter.isValidInput(password)) {
-            callback.onLoading();
-            repository.signIn(username, password, callback);
-        } else
-            callback.onFailure();
+    public Response<String> execute(int id, String password) {
+        return repository.signIn(id, password);
     }
 
 }

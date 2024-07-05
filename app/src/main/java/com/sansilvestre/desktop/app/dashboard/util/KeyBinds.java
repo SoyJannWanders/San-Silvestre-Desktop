@@ -21,7 +21,8 @@ public class KeyBinds {
     }
 
     public void restartKeyBindsService() {
-        component.requestFocusInWindow();
+        if (component != null)
+            component.requestFocusInWindow();
     }
 
 }

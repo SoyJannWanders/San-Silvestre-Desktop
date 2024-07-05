@@ -1,8 +1,7 @@
 package com.sansilvestre.desktop.app.product.util;
 
-import com.sansilvestre.desktop.app.product.add.domain.util.Currency;
-import com.sansilvestre.desktop.app.product.add.domain.util.Rounder;
-import com.sansilvestre.desktop.app.product.add.domain.util.Utilities;
+import com.sansilvestre.desktop.app.util.formatter.Currency;
+import com.sansilvestre.desktop.app.util.formatter.Rounder;
 
 public class Billing {
 
@@ -51,7 +50,7 @@ public class Billing {
     }
 
     public double getProfit() {
-        return (cost /(1 - Utilities.getProfitPercentage())) - cost;
+        return (cost /(1 - 40)) - cost;
     }
 
     public String getFormattedPrice() {

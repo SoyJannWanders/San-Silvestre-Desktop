@@ -1,151 +1,171 @@
 package com.sansilvestre.desktop.app.product.domain.model;
 
-import com.sansilvestre.desktop.app.product.add.domain.util.Currency;
+import com.sansilvestre.desktop.app.product.data.source.ProductDatabase;
 
-import java.time.LocalDate;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class Product {
 
     private String barcode;
-    private String label;
-    private LocalDate addedDate;
-    private LocalDate updatedDate;
-    private Category category;
+    private String name;
+    private double spent;
+    private int units;
+    private double taxes;
     private int stock;
-    private int UID;
-    private int OID;
-    private double cost;
-    private boolean hasAdditionalTaxes;
-    private boolean isActive = true;
+    private int categoryId;
+    private int userId;
+    private int branchId;
+    private LocalDateTime addedDate;
+    private LocalDateTime updatedDate;
 
-    public String toString() {
-        String product = "" +
-                "Producto:" +
-                "\nBarcode: " + barcode +
-                "\nLabel: " + label +
-                "\nCost: " + cost +
-                "\nCategory: " + category +
-                "\nStock: " + stock +
-                "\nHas Additional Taxes: " + hasAdditionalTaxes +
-                "\nUID: " + UID +
-                "\nOID: " + OID +
-                "\nAdded Date: " + addedDate +
-                "\nUpdated Date: " + updatedDate +
-                "\nIs Active: " + isActive;
-        return product;
+    public Product(ResultSet result) throws SQLException {
+        barcode = result.getString(ProductDatabase.BARCODE.getColumnName());
+        name = result.getString(ProductDatabase.NAME.getColumnName());
+        spent = result.getDouble(ProductDatabase.SPENT.getColumnName());
+        units = result.getInt(ProductDatabase.UNITS.getColumnName());
+        taxes = result.getDouble(ProductDatabase.TAXES.getColumnName());
+        stock = result.getInt(ProductDatabase.STOCK.getColumnName());
+        categoryId = result.getInt(ProductDatabase.CATEGORY_ID.getColumnName());
+        userId = result.getInt(ProductDatabase.USER_ID.getColumnName());
+        branchId = result.getInt(ProductDatabase.BRANCH_ID.getColumnName());
+        addedDate = result.getTimestamp(ProductDatabase.ADDED_DATE.getColumnName()).toLocalDateTime();
+        updatedDate = result.getTimestamp(ProductDatabase.UPDATED_DATE.getColumnName()).toLocalDateTime();
     }
 
-    public Product setBarcode(String barcode) {
+    public Product(String barcode, String name, double spent, int units, double taxes, int stock, int categoryId, int userId, int branchId) {
         this.barcode = barcode;
-        return this;
+        this.name = name;
+        this.spent = spent;
+        this.units = units;
+        this.taxes = taxes;
+        this.stock = stock;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.branchId = branchId;
+    }
+
+    public void populateStatementForAdd(PreparedStatement statement) throws SQLException {
+        statement.setString(1, barcode);
+        statement.setString(2, name);
+        statement.setDouble(3, spent);
+        statement.setDouble(4, units);
+        statement.setDouble(5, taxes);
+        statement.setInt(6, stock);
+        statement.setInt(7, categoryId);
+        statement.setInt(8, userId);
+        statement.setInt(9, branchId);
+    }
+
+    public void populateStatementForSyncAdd(PreparedStatement statement) throws SQLException {
+        statement.setString(1, barcode);
+        statement.setString(2, name);
+        statement.setDouble(3, spent);
+        statement.setDouble(4, units);
+        statement.setDouble(5, taxes);
+        statement.setInt(6, stock);
+        statement.setInt(7, categoryId);
+        statement.setInt(8, userId);
+        statement.setInt(9, branchId);
+        statement.setObject(10, addedDate);
+        statement.setObject(11, updatedDate);
+    }
+
+    public void populateStatementForUpdate(PreparedStatement statement) throws SQLException {
+        statement.setString(1, name);
+        statement.setDouble(2, spent);
+        statement.setDouble(3, units);
+        statement.setDouble(4, taxes);
+        statement.setInt(5, stock);
+        statement.setInt(6, categoryId);
+        statement.setInt(7, userId);
+        statement.setString(8, barcode);
+    }
+
+    public void populateStatementForSyncUpdate(PreparedStatement statement) throws SQLException {
+        statement.setString(1, name);
+        statement.setDouble(2, spent);
+        statement.setDouble(3, units);
+        statement.setDouble(4, taxes);
+        statement.setInt(5, stock);
+        statement.setInt(6, categoryId);
+        statement.setInt(7, userId);
+        statement.setObject(8, updatedDate);
+        statement.setString(9, barcode);
     }
     
     public String getBarcode() {
         return barcode;
     }
-    
-    public Product setLabel(String label) {
-        this.label = label;
-        return this;
+
+    public String getName() {
+        return name;
     }
 
-    public String getLabel() {
-        return label;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Product setAddedDate(LocalDate addedDate) {
-        this.addedDate = addedDate;
-        return this;
+    public double getSpent() {
+        return spent;
     }
 
-    public LocalDate getAddedDate() {
-        return addedDate;
+    public void setSpent(double spent) {
+        this.spent = spent;
     }
 
-    public Product setUpdatedDate(LocalDate updatedDate) {
-        this.updatedDate = updatedDate;
-        return this;
+    public int getUnits() {
+        return units;
     }
 
-    public LocalDate getUpdatedDate() {
-        return updatedDate;
+    public void setUnits(int units) {
+        this.units = units;
     }
 
-    public Product setCategory(String category) {
-        if (category.equals(Category.FURNITURE.getValue()))
-            this.category = Category.FURNITURE;
-        if (category.equals(Category.APPLIANCES.getValue()))
-            this.category = Category.APPLIANCES;
-        if (category.equals(Category.ELECTRONICS.getValue()))
-            this.category = Category.ELECTRONICS;
-        if (category.equals(Category.FOOD.getValue()))
-            this.category = Category.FOOD;
-        if (category.equals(Category.TOYS.getValue()))
-            this.category = Category.TOYS;
-        return this;
+    public double getTaxes() {
+        return taxes;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public Product setStock(int stock) {
-        this.stock = stock;
-        return this;
-    }
-
-    public Product setStock(String stock) {
-        this.stock = Integer.parseInt(stock);
-        return this;
+    public void setTaxes(double taxes) {
+        this.taxes = taxes;
     }
 
     public int getStock() {
         return stock;
     }
 
-    public Product setUID(int UID) {
-        this.UID = UID;
-        return this;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public int getUID() {
-        return UID;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public Product setOID(int OID) {
-        this.OID = OID;
-        return this;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public int getOID() {
-        return OID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Product setCost(double cost) {
-        this.cost = cost;
-        return this;
+    public LocalDateTime getAddedDate() {
+        return addedDate;
     }
 
-    public Product setCost(String cost) {
-        this.cost = Double.parseDouble(Currency.removeFormat(cost));
-        return this;
+    public void setAddedDate(LocalDateTime addedDate) {
+        this.addedDate = addedDate;
     }
 
-    public double getCost() {
-        return cost;
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
     }
 
-    public Product setAdditionalTaxes(boolean hasAdditionalTaxes) {
-        this.hasAdditionalTaxes = hasAdditionalTaxes;
-        return this;
-    }
-
-    public boolean hasAdditionalTaxes() {
-        return hasAdditionalTaxes;
-    }
-
-    public boolean isActive() {
-        return isActive;
+    public void setUpdatedDate(LocalDateTime updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
 }
