@@ -2,6 +2,7 @@ package com.sansilvestre.desktop.app.auth.screen;
 
 import com.sansilvestre.desktop.app.NavigationData;
 import com.sansilvestre.desktop.app.ViewStateController;
+import com.sansilvestre.desktop.app.auth.domain.model.Auth;
 import com.sansilvestre.desktop.app.util.exception.form.BlankIDException;
 import com.sansilvestre.desktop.app.util.exception.form.BlankPasswordException;
 import com.sansilvestre.desktop.app.user.domain.model.Role;
@@ -220,9 +221,9 @@ public class AuthScreen extends javax.swing.JPanel implements AuthViewController
     }
 
     @Override
-    public void setRole(Role role) {
+    public void isAuthenticated() {
         NavigationController.getInstance().navigate(NavigationController.Route.DASHBOARD_SCREEN, new NavigationData(
-                new Object[] { role }, new Class[] { Role.class }
+                new Object[] { Auth.getInstance().getRole() }, new Class[] { Role.class }
         ));
     }
 

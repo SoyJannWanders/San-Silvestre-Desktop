@@ -18,7 +18,7 @@ public class SettingStorage {
             try (PreparedStatement statement = connection.prepareStatement(SettingQuery.GET_SETTING)) {
                 try (ResultSet result = statement.executeQuery()) {
                     if (result.next()) {
-                        Setting.initializeInstance(result);
+                        Setting.init(result);
                     }
                     return new Response.Success<>(null);
                 }

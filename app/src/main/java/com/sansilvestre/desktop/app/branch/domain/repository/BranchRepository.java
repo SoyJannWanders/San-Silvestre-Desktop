@@ -11,9 +11,6 @@ public interface BranchRepository {
 
     void setBranchViewController(BranchViewController viewController);
 
-    void startSync();
-    void stopSync();
-
     Response<Map<Integer, Branch>> getBranchMap();
 
     Response<List<Branch>> getBranchList();
@@ -24,5 +21,8 @@ public interface BranchRepository {
     Response<Void> updateBranch(Branch branch);
 
     Response<Void> deleteBranchByID(int id);
+
+    void startSync();
+    void stopSync();
 
 }

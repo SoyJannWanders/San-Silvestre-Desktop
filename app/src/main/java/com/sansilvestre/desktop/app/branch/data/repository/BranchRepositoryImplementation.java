@@ -26,15 +26,6 @@ public class BranchRepositoryImplementation implements BranchRepository {
     private final BranchStorage storage;
     private final BranchAPI api;
 
-    private final UnsyncedTaskQueue queue = new UnsyncedTaskQueue();
-    private final QueueBackup queueBackup = new QueueBackup();
-
-    private boolean isSync = true;
-
-    private boolean isAdding = false;
-    private boolean isUpdating = false;
-    private boolean isDeleting = false;
-
     public BranchRepositoryImplementation(BranchStorage storage, BranchAPI api) {
         this.storage = storage;
         this.api = api;
@@ -165,6 +156,15 @@ public class BranchRepositoryImplementation implements BranchRepository {
         });
         return deleteCategoryByID;
     }
+
+    private final UnsyncedTaskQueue queue = new UnsyncedTaskQueue();
+    private final QueueBackup queueBackup = new QueueBackup();
+
+    private boolean isSync = true;
+
+    private boolean isAdding = false;
+    private boolean isUpdating = false;
+    private boolean isDeleting = false;
 
     @Override
     public void startSync() {
@@ -480,20 +480,20 @@ public class BranchRepositoryImplementation implements BranchRepository {
 
         }
 
-        public void add(UnsyncedBranch unsyncedProduct) {
+        public void add(UnsyncedBranch unsyncedBranch) {
 
-            Response<Void> add = unsyncedStorage.addUnsyncedBranchInQueue(unsyncedProduct);
+            Response<Void> add = unsyncedStorage.addUnsyncedBranchInQueue(unsyncedBranch);
             add.accept(new ResponseVisitor<>() {
 
                 @Override
                 public void visitSuccess(Response.Success<Void> success) {
-                    Console.info(Console.InfoCode.I001, "OK: Add Product Insertion in Queue - " + unsyncedProduct.getBranchId());
-                    unsyncedBranches.add(unsyncedProduct);
+                    Console.info(Console.InfoCode.I001, "OK: Add Product Insertion in Queue - " + unsyncedBranch.getBranchId());
+                    unsyncedBranches.add(unsyncedBranch);
                 }
 
                 @Override
                 public void visitFailure(Response.Failure<Void> failure) {
-                    Console.warn(Console.WarnCode.W001, "ERROR: Add Product Insertion in Queue - " + unsyncedProduct.getBranchId());
+                    Console.warn(Console.WarnCode.W001, "ERROR: Add Product Insertion in Queue - " + unsyncedBranch.getBranchId());
                 }
 
             });
@@ -504,20 +504,20 @@ public class BranchRepositoryImplementation implements BranchRepository {
 
             if (!unsyncedBranches.isEmpty()) {
 
-                UnsyncedBranch unsyncedProduct = unsyncedBranches.getFirst();
+                UnsyncedBranch unsyncedBranch = unsyncedBranches.getFirst();
 
-                Response<Void> delete = unsyncedStorage.deleteUnsyncedBranchOfQueueByID(unsyncedProduct.getId());
+                Response<Void> delete = unsyncedStorage.deleteUnsyncedBranchOfQueueByID(unsyncedBranch.getId());
                 delete.accept(new ResponseVisitor<>() {
 
                     @Override
                     public void visitSuccess(Response.Success<Void> success) {
-                        Console.info(Console.InfoCode.I001, "OK: Product Synchronized - " + unsyncedProduct.getBranchId());
+                        Console.info(Console.InfoCode.I001, "OK: Product Synchronized - " + unsyncedBranch.getBranchId());
                         unsyncedBranches.removeFirst();
                     }
 
                     @Override
                     public void visitFailure(Response.Failure<Void> failure) {
-                        Console.warn(Console.WarnCode.W001, "ERROR: Unsynchronized Product - " + unsyncedProduct.getBranchId());
+                        Console.warn(Console.WarnCode.W001, "ERROR: Unsynchronized Product - " + unsyncedBranch.getBranchId());
                     }
 
                 });

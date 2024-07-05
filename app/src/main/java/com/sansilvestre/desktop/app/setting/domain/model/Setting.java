@@ -34,7 +34,7 @@ public class Setting {
         this.theme = theme;
     }
 
-    public static void initializeInstance(ResultSet result) throws SQLException {
+    public static void init(ResultSet result) throws SQLException {
         instance = new Setting(result);
     }
 

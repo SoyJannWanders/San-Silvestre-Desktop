@@ -1,10 +1,8 @@
 package com.sansilvestre.desktop.app.auth.screen;
 
 import com.sansilvestre.desktop.app.ViewStateController;
+import com.sansilvestre.desktop.app.auth.domain.model.Auth;
 import com.sansilvestre.desktop.app.auth.domain.usecase.SignIn;
-import com.sansilvestre.desktop.app.auth.screen.AuthEvent;
-import com.sansilvestre.desktop.app.auth.screen.AuthViewController;
-import com.sansilvestre.desktop.app.user.domain.model.Role;
 import com.sansilvestre.desktop.app.util.data.response.ResponseHandler;
 
 import javax.swing.*;
@@ -34,8 +32,9 @@ public class AuthViewModel {
                 if (event instanceof AuthEvent.SignInEvent) {
                     int id = ((AuthEvent.SignInEvent) event).getId();
                     String password = ((AuthEvent.SignInEvent) event).getPassword();
-                    ResponseHandler.handleResponse(signIn.execute(id, password), viewStateController, role -> {
-                        viewController.setRole(Role.valueOf(role));
+                    ResponseHandler.handleResponse(signIn.execute(id, password), viewStateController, user -> {
+                        Auth.init(user);
+                        viewController.isAuthenticated();
                     });
                 }
                 return null;

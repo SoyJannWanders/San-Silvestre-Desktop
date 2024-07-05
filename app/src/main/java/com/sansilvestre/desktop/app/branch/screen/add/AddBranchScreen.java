@@ -260,7 +260,7 @@ public class AddBranchScreen extends javax.swing.JPanel implements AddBranchView
 
                 String address = isValidAddress(txtAddress.getText());
 
-                return new Response.Success<>(new Branch(name, address));
+                return new Response.Success<>(new Branch(name, address, 1));
 
             } catch (Exception e) {
 
